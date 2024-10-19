@@ -1,9 +1,5 @@
 # grscheller-docs
 
-Documentation for PyPI grscheller namespace project.
+Detailed [documentation](https://grscheller.github.io/grscheller-docs/)
+for the PyPI grscheller namespace project.
 
-* grscheller.boring-math
-* grscheller.circular-array
-* grscheller.datastructures
-* grscheller.experimental
-* grscheller.fp
