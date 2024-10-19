@@ -1,6 +1,7 @@
 # grscheller-docs
 
-Detailed [documentation](https://grscheller.github.io/grscheller-docs/)
+Detailed
+[documentation](https://grscheller.github.io/grscheller-pypi-namespace-docs/)
 for all the currently maintained grscheller namespace projects on PyPI.
 
 Corresponding GitHub source code repos:
