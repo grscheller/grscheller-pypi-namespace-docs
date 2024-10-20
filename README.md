@@ -11,3 +11,15 @@ Corresponding GitHub source code repos:
 * [grscheller.datastructures](https://github.com/grscheller/datastructures)
 * [grscheller.experimental](https://github.com/grscheller/experimental)
 * [grscheller.fp](https://github.com/grscheller/fp)
+
+Using the grscheller.boring-math as an example, here is how one
+generates the docs with pdoc. The boring-math project depends on both
+the fp and circular-array projects.
+
+```bash
+   $ cd docs/boring_math/API/development/
+   $ rm -r grscheller/ index.html search.js
+   $ PYTHONPATH=~/devel/pypi/circular-array/src:~/devel/pypi/fp/src:~/devel/pypi/boring-math/src
+   $ pdoc -o . grscheller.boring_math
+```
+
