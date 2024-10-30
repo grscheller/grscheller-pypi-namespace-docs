@@ -424,28 +424,38 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.err_handling    </h1>
 </span><span id="L-306"><a href="#L-306"><span class="linenos">306</span></a>        <span class="k">else</span><span class="p">:</span>
 </span><span id="L-307"><a href="#L-307"><span class="linenos">307</span></a>            <span class="k">return</span> <span class="n">MB</span><span class="p">()</span>
 </span><span id="L-308"><a href="#L-308"><span class="linenos">308</span></a>
-</span><span id="L-309"><a href="#L-309"><span class="linenos">309</span></a>    <span class="n">ds</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Sequence</span><span class="p">[</span><span class="n">D</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="n">seq_mb_d</span><span class="p">)(</span><span class="n">l</span><span class="p">))</span>  <span class="c1"># type: ignore # at runtime it&#39;s a subclass of Sequence</span>
+</span><span id="L-309"><a href="#L-309"><span class="linenos">309</span></a>    <span class="n">ds</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Sequence</span><span class="p">[</span><span class="n">D</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="n">seq_mb_d</span><span class="p">)(</span><span class="n">l</span><span class="p">))</span>  <span class="c1"># type: ignore # will be a subclass at runtime</span>
 </span><span id="L-310"><a href="#L-310"><span class="linenos">310</span></a>    <span class="k">return</span> <span class="n">MB</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
 </span><span id="L-311"><a href="#L-311"><span class="linenos">311</span></a>
-</span><span id="L-312"><a href="#L-312"><span class="linenos">312</span></a><span class="k">def</span> <span class="nf">sequence_xor</span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">](</span><span class="n">seq_xor_lr</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">XOR</span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">XOR</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">L</span><span class="p">],</span><span class="n">R</span><span class="p">]:</span>
-</span><span id="L-313"><a href="#L-313"><span class="linenos">313</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sequence an indexable container of XOR[L,R]</span>
-</span><span id="L-314"><a href="#L-314"><span class="linenos">314</span></a>
-</span><span id="L-315"><a href="#L-315"><span class="linenos">315</span></a><span class="sd">    If all the XOR&#39;s contained in the container are lefts,</span>
+</span><span id="L-312"><a href="#L-312"><span class="linenos">312</span></a><span class="k">def</span> <span class="nf">sequence_xor</span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">](</span><span class="n">seq_xor_lr</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">XOR</span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">]],</span>
+</span><span id="L-313"><a href="#L-313"><span class="linenos">313</span></a>                      <span class="n">potential_right</span><span class="p">:</span> <span class="n">R</span><span class="o">|</span><span class="n">Sentinel</span><span class="o">=</span><span class="n">_sentinel</span><span class="p">,</span>
+</span><span id="L-314"><a href="#L-314"><span class="linenos">314</span></a>                      <span class="n">default_right</span><span class="p">:</span> <span class="n">R</span><span class="o">|</span><span class="n">Sentinel</span><span class="o">=</span><span class="n">_sentinel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">XOR</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">L</span><span class="p">],</span><span class="n">R</span><span class="p">]:</span>
+</span><span id="L-315"><a href="#L-315"><span class="linenos">315</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sequence an indexable container of XOR[L,R]</span>
 </span><span id="L-316"><a href="#L-316"><span class="linenos">316</span></a>
-</span><span id="L-317"><a href="#L-317"><span class="linenos">317</span></a><span class="sd">    * return an XOR of the same type container of all the left values</span>
-</span><span id="L-318"><a href="#L-318"><span class="linenos">318</span></a><span class="sd">    * otherwise return a right XOR containing the right value of the first right</span>
-</span><span id="L-319"><a href="#L-319"><span class="linenos">319</span></a>
-</span><span id="L-320"><a href="#L-320"><span class="linenos">320</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-321"><a href="#L-321"><span class="linenos">321</span></a>    <span class="n">l</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">L</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="L-322"><a href="#L-322"><span class="linenos">322</span></a>
-</span><span id="L-323"><a href="#L-323"><span class="linenos">323</span></a>    <span class="k">for</span> <span class="n">xor_lr</span> <span class="ow">in</span> <span class="n">seq_xor_lr</span><span class="p">:</span>
-</span><span id="L-324"><a href="#L-324"><span class="linenos">324</span></a>        <span class="k">if</span> <span class="n">xor_lr</span><span class="p">:</span>
-</span><span id="L-325"><a href="#L-325"><span class="linenos">325</span></a>            <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xor_lr</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
-</span><span id="L-326"><a href="#L-326"><span class="linenos">326</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="L-327"><a href="#L-327"><span class="linenos">327</span></a>            <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">right</span><span class="o">=</span><span class="n">xor_lr</span><span class="o">.</span><span class="n">getRight</span><span class="p">())</span>
-</span><span id="L-328"><a href="#L-328"><span class="linenos">328</span></a>
-</span><span id="L-329"><a href="#L-329"><span class="linenos">329</span></a>    <span class="n">ls</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Sequence</span><span class="p">[</span><span class="n">L</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="n">seq_xor_lr</span><span class="p">)(</span><span class="n">l</span><span class="p">))</span>  <span class="c1"># type: ignore # at runtime it&#39;s a subclass of Sequence</span>
-</span><span id="L-330"><a href="#L-330"><span class="linenos">330</span></a>    <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
+</span><span id="L-317"><a href="#L-317"><span class="linenos">317</span></a><span class="sd">    * if all the XOR\&#39;s contained in the container are lefts, then</span>
+</span><span id="L-318"><a href="#L-318"><span class="linenos">318</span></a><span class="sd">      * return an XOR of the same type container of all the left values</span>
+</span><span id="L-319"><a href="#L-319"><span class="linenos">319</span></a><span class="sd">      * setting the potential right to `potential_right` if given</span>
+</span><span id="L-320"><a href="#L-320"><span class="linenos">320</span></a><span class="sd">    * if at least one of the XOR\&#39;s contained in the container is a right,</span>
+</span><span id="L-321"><a href="#L-321"><span class="linenos">321</span></a><span class="sd">      * return a right XOR containing the right value of the first right</span>
+</span><span id="L-322"><a href="#L-322"><span class="linenos">322</span></a><span class="sd">      * if right does not contain an R, return right containing `default_right`</span>
+</span><span id="L-323"><a href="#L-323"><span class="linenos">323</span></a>
+</span><span id="L-324"><a href="#L-324"><span class="linenos">324</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-325"><a href="#L-325"><span class="linenos">325</span></a>    <span class="n">l</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">L</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="L-326"><a href="#L-326"><span class="linenos">326</span></a>
+</span><span id="L-327"><a href="#L-327"><span class="linenos">327</span></a>    <span class="k">for</span> <span class="n">xor_lr</span> <span class="ow">in</span> <span class="n">seq_xor_lr</span><span class="p">:</span>
+</span><span id="L-328"><a href="#L-328"><span class="linenos">328</span></a>        <span class="k">if</span> <span class="n">xor_lr</span><span class="p">:</span>
+</span><span id="L-329"><a href="#L-329"><span class="linenos">329</span></a>            <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xor_lr</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+</span><span id="L-330"><a href="#L-330"><span class="linenos">330</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="L-331"><a href="#L-331"><span class="linenos">331</span></a>            <span class="k">try</span><span class="p">:</span>
+</span><span id="L-332"><a href="#L-332"><span class="linenos">332</span></a>                <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">right</span><span class="o">=</span><span class="n">xor_lr</span><span class="o">.</span><span class="n">getRight</span><span class="p">())</span>
+</span><span id="L-333"><a href="#L-333"><span class="linenos">333</span></a>            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+</span><span id="L-334"><a href="#L-334"><span class="linenos">334</span></a>                <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">right</span><span class="o">=</span><span class="n">default_right</span><span class="p">)</span>
+</span><span id="L-335"><a href="#L-335"><span class="linenos">335</span></a>
+</span><span id="L-336"><a href="#L-336"><span class="linenos">336</span></a>    <span class="n">ds</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Sequence</span><span class="p">[</span><span class="n">L</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="n">seq_xor_lr</span><span class="p">)(</span><span class="n">l</span><span class="p">))</span>  <span class="c1"># type: ignore # will be a subclass at runtime</span>
+</span><span id="L-337"><a href="#L-337"><span class="linenos">337</span></a>    <span class="k">if</span> <span class="n">potential_right</span> <span class="ow">is</span> <span class="n">_sentinel</span><span class="p">:</span>
+</span><span id="L-338"><a href="#L-338"><span class="linenos">338</span></a>        <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+</span><span id="L-339"><a href="#L-339"><span class="linenos">339</span></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="L-340"><a href="#L-340"><span class="linenos">340</span></a>        <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">potential_right</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -1225,7 +1235,7 @@ value to <code>right</code> if given.</p>
 </span><span id="sequence_mb-307"><a href="#sequence_mb-307"><span class="linenos">307</span></a>        <span class="k">else</span><span class="p">:</span>
 </span><span id="sequence_mb-308"><a href="#sequence_mb-308"><span class="linenos">308</span></a>            <span class="k">return</span> <span class="n">MB</span><span class="p">()</span>
 </span><span id="sequence_mb-309"><a href="#sequence_mb-309"><span class="linenos">309</span></a>
-</span><span id="sequence_mb-310"><a href="#sequence_mb-310"><span class="linenos">310</span></a>    <span class="n">ds</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Sequence</span><span class="p">[</span><span class="n">D</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="n">seq_mb_d</span><span class="p">)(</span><span class="n">l</span><span class="p">))</span>  <span class="c1"># type: ignore # at runtime it&#39;s a subclass of Sequence</span>
+</span><span id="sequence_mb-310"><a href="#sequence_mb-310"><span class="linenos">310</span></a>    <span class="n">ds</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Sequence</span><span class="p">[</span><span class="n">D</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="n">seq_mb_d</span><span class="p">)(</span><span class="n">l</span><span class="p">))</span>  <span class="c1"># type: ignore # will be a subclass at runtime</span>
 </span><span id="sequence_mb-311"><a href="#sequence_mb-311"><span class="linenos">311</span></a>    <span class="k">return</span> <span class="n">MB</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
 </span></pre></div>
 
@@ -1247,41 +1257,57 @@ value to <code>right</code> if given.</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">sequence_xor</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">seq_xor_lr</span><span class="p">:</span> <span class="s1">&#39;Sequence[XOR[L, R]]&#39;</span></span><span class="return-annotation">) -> <span class="s1">&#39;XOR[Sequence[L], R]&#39;</span>:</span></span>
+        <span class="name">sequence_xor</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">seq_xor_lr</span><span class="p">:</span> <span class="s1">&#39;Sequence[XOR[L, R]]&#39;</span>,</span><span class="param">	<span class="n">potential_right</span><span class="p">:</span> <span class="s1">&#39;R | Sentinel&#39;</span> <span class="o">=</span> <span class="n">Sentinel</span><span class="p">()</span>,</span><span class="param">	<span class="n">default_right</span><span class="p">:</span> <span class="s1">&#39;R | Sentinel&#39;</span> <span class="o">=</span> <span class="n">Sentinel</span><span class="p">()</span></span><span class="return-annotation">) -> <span class="s1">&#39;XOR[Sequence[L], R]&#39;</span>:</span></span>
 
                 <label class="view-source-button" for="sequence_xor-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#sequence_xor"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="sequence_xor-313"><a href="#sequence_xor-313"><span class="linenos">313</span></a><span class="k">def</span> <span class="nf">sequence_xor</span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">](</span><span class="n">seq_xor_lr</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">XOR</span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">XOR</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">L</span><span class="p">],</span><span class="n">R</span><span class="p">]:</span>
-</span><span id="sequence_xor-314"><a href="#sequence_xor-314"><span class="linenos">314</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sequence an indexable container of XOR[L,R]</span>
-</span><span id="sequence_xor-315"><a href="#sequence_xor-315"><span class="linenos">315</span></a>
-</span><span id="sequence_xor-316"><a href="#sequence_xor-316"><span class="linenos">316</span></a><span class="sd">    If all the XOR&#39;s contained in the container are lefts,</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="sequence_xor-313"><a href="#sequence_xor-313"><span class="linenos">313</span></a><span class="k">def</span> <span class="nf">sequence_xor</span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">](</span><span class="n">seq_xor_lr</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">XOR</span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="p">]],</span>
+</span><span id="sequence_xor-314"><a href="#sequence_xor-314"><span class="linenos">314</span></a>                      <span class="n">potential_right</span><span class="p">:</span> <span class="n">R</span><span class="o">|</span><span class="n">Sentinel</span><span class="o">=</span><span class="n">_sentinel</span><span class="p">,</span>
+</span><span id="sequence_xor-315"><a href="#sequence_xor-315"><span class="linenos">315</span></a>                      <span class="n">default_right</span><span class="p">:</span> <span class="n">R</span><span class="o">|</span><span class="n">Sentinel</span><span class="o">=</span><span class="n">_sentinel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">XOR</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">L</span><span class="p">],</span><span class="n">R</span><span class="p">]:</span>
+</span><span id="sequence_xor-316"><a href="#sequence_xor-316"><span class="linenos">316</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sequence an indexable container of XOR[L,R]</span>
 </span><span id="sequence_xor-317"><a href="#sequence_xor-317"><span class="linenos">317</span></a>
-</span><span id="sequence_xor-318"><a href="#sequence_xor-318"><span class="linenos">318</span></a><span class="sd">    * return an XOR of the same type container of all the left values</span>
-</span><span id="sequence_xor-319"><a href="#sequence_xor-319"><span class="linenos">319</span></a><span class="sd">    * otherwise return a right XOR containing the right value of the first right</span>
-</span><span id="sequence_xor-320"><a href="#sequence_xor-320"><span class="linenos">320</span></a>
-</span><span id="sequence_xor-321"><a href="#sequence_xor-321"><span class="linenos">321</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="sequence_xor-322"><a href="#sequence_xor-322"><span class="linenos">322</span></a>    <span class="n">l</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">L</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="sequence_xor-323"><a href="#sequence_xor-323"><span class="linenos">323</span></a>
-</span><span id="sequence_xor-324"><a href="#sequence_xor-324"><span class="linenos">324</span></a>    <span class="k">for</span> <span class="n">xor_lr</span> <span class="ow">in</span> <span class="n">seq_xor_lr</span><span class="p">:</span>
-</span><span id="sequence_xor-325"><a href="#sequence_xor-325"><span class="linenos">325</span></a>        <span class="k">if</span> <span class="n">xor_lr</span><span class="p">:</span>
-</span><span id="sequence_xor-326"><a href="#sequence_xor-326"><span class="linenos">326</span></a>            <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xor_lr</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
-</span><span id="sequence_xor-327"><a href="#sequence_xor-327"><span class="linenos">327</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="sequence_xor-328"><a href="#sequence_xor-328"><span class="linenos">328</span></a>            <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">right</span><span class="o">=</span><span class="n">xor_lr</span><span class="o">.</span><span class="n">getRight</span><span class="p">())</span>
-</span><span id="sequence_xor-329"><a href="#sequence_xor-329"><span class="linenos">329</span></a>
-</span><span id="sequence_xor-330"><a href="#sequence_xor-330"><span class="linenos">330</span></a>    <span class="n">ls</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Sequence</span><span class="p">[</span><span class="n">L</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="n">seq_xor_lr</span><span class="p">)(</span><span class="n">l</span><span class="p">))</span>  <span class="c1"># type: ignore # at runtime it&#39;s a subclass of Sequence</span>
-</span><span id="sequence_xor-331"><a href="#sequence_xor-331"><span class="linenos">331</span></a>    <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
+</span><span id="sequence_xor-318"><a href="#sequence_xor-318"><span class="linenos">318</span></a><span class="sd">    * if all the XOR\&#39;s contained in the container are lefts, then</span>
+</span><span id="sequence_xor-319"><a href="#sequence_xor-319"><span class="linenos">319</span></a><span class="sd">      * return an XOR of the same type container of all the left values</span>
+</span><span id="sequence_xor-320"><a href="#sequence_xor-320"><span class="linenos">320</span></a><span class="sd">      * setting the potential right to `potential_right` if given</span>
+</span><span id="sequence_xor-321"><a href="#sequence_xor-321"><span class="linenos">321</span></a><span class="sd">    * if at least one of the XOR\&#39;s contained in the container is a right,</span>
+</span><span id="sequence_xor-322"><a href="#sequence_xor-322"><span class="linenos">322</span></a><span class="sd">      * return a right XOR containing the right value of the first right</span>
+</span><span id="sequence_xor-323"><a href="#sequence_xor-323"><span class="linenos">323</span></a><span class="sd">      * if right does not contain an R, return right containing `default_right`</span>
+</span><span id="sequence_xor-324"><a href="#sequence_xor-324"><span class="linenos">324</span></a>
+</span><span id="sequence_xor-325"><a href="#sequence_xor-325"><span class="linenos">325</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="sequence_xor-326"><a href="#sequence_xor-326"><span class="linenos">326</span></a>    <span class="n">l</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">L</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="sequence_xor-327"><a href="#sequence_xor-327"><span class="linenos">327</span></a>
+</span><span id="sequence_xor-328"><a href="#sequence_xor-328"><span class="linenos">328</span></a>    <span class="k">for</span> <span class="n">xor_lr</span> <span class="ow">in</span> <span class="n">seq_xor_lr</span><span class="p">:</span>
+</span><span id="sequence_xor-329"><a href="#sequence_xor-329"><span class="linenos">329</span></a>        <span class="k">if</span> <span class="n">xor_lr</span><span class="p">:</span>
+</span><span id="sequence_xor-330"><a href="#sequence_xor-330"><span class="linenos">330</span></a>            <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xor_lr</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+</span><span id="sequence_xor-331"><a href="#sequence_xor-331"><span class="linenos">331</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="sequence_xor-332"><a href="#sequence_xor-332"><span class="linenos">332</span></a>            <span class="k">try</span><span class="p">:</span>
+</span><span id="sequence_xor-333"><a href="#sequence_xor-333"><span class="linenos">333</span></a>                <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">right</span><span class="o">=</span><span class="n">xor_lr</span><span class="o">.</span><span class="n">getRight</span><span class="p">())</span>
+</span><span id="sequence_xor-334"><a href="#sequence_xor-334"><span class="linenos">334</span></a>            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+</span><span id="sequence_xor-335"><a href="#sequence_xor-335"><span class="linenos">335</span></a>                <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">right</span><span class="o">=</span><span class="n">default_right</span><span class="p">)</span>
+</span><span id="sequence_xor-336"><a href="#sequence_xor-336"><span class="linenos">336</span></a>
+</span><span id="sequence_xor-337"><a href="#sequence_xor-337"><span class="linenos">337</span></a>    <span class="n">ds</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Sequence</span><span class="p">[</span><span class="n">L</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="n">seq_xor_lr</span><span class="p">)(</span><span class="n">l</span><span class="p">))</span>  <span class="c1"># type: ignore # will be a subclass at runtime</span>
+</span><span id="sequence_xor-338"><a href="#sequence_xor-338"><span class="linenos">338</span></a>    <span class="k">if</span> <span class="n">potential_right</span> <span class="ow">is</span> <span class="n">_sentinel</span><span class="p">:</span>
+</span><span id="sequence_xor-339"><a href="#sequence_xor-339"><span class="linenos">339</span></a>        <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+</span><span id="sequence_xor-340"><a href="#sequence_xor-340"><span class="linenos">340</span></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="sequence_xor-341"><a href="#sequence_xor-341"><span class="linenos">341</span></a>        <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span> <span class="n">potential_right</span><span class="p">)</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Sequence an indexable container of XOR[L,R]</p>
 
-<p>If all the XOR's contained in the container are lefts,</p>
-
+<ul>
+<li>if all the XOR's contained in the container are lefts, then
 <ul>
 <li>return an XOR of the same type container of all the left values</li>
-<li>otherwise return a right XOR containing the right value of the first right</li>
+<li>setting the potential right to <code>potential_right</code> if given</li>
+</ul></li>
+<li>if at least one of the XOR's contained in the container is a right,
+<ul>
+<li>return a right XOR containing the right value of the first right</li>
+<li>if right does not contain an R, return right containing <code>default_right</code></li>
+</ul></li>
 </ul>
 </div>
 
