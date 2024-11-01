@@ -159,10 +159,10 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
 </span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="k">def</span> <span class="nf">concat</span><span class="p">[</span><span class="n">D</span><span class="p">](</span><span class="o">*</span><span class="n">iterables</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">D</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">D</span><span class="p">]:</span>
 </span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sequentially concatenate multiple iterables together.</span>
 </span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">    * pure Python version of standard library&#39;s itertools.chain</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">    * pure Python version of standard library&#39;s `itertools.chain`</span>
 </span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="sd">    * iterator sequentially yields each iterable until all are exhausted</span>
 </span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="sd">    * an infinite iterable will prevent subsequent iterables from yielding any values</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">    * performant to chain</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">    * performant to `itertools.chain`</span>
 </span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>
 </span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>    <span class="k">for</span> <span class="n">iterator</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">iter</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">iterables</span><span class="p">):</span>
@@ -201,10 +201,10 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
 </span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>            <span class="k">yield</span> <span class="n">value</span>
 </span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>
 </span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a><span class="k">def</span> <span class="nf">merge</span><span class="p">[</span><span class="n">D</span><span class="p">](</span><span class="o">*</span><span class="n">iterables</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">D</span><span class="p">],</span> <span class="n">yield_partials</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">D</span><span class="p">]:</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Shuffle together multiple iterables until one is exhausted.</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Shuffle together the `iterables` until one is exhausted.</span>
 </span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>
 </span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="sd">    * iterator yields until one of the iterables is exhausted</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">    * if yield_partials is true, yield any unmatched yielded values from other iterables</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">    * if `yield_partials` is true, yield any unmatched yielded values from other iterables</span>
 </span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">      * prevents data lose if any of the iterables are iterators with external references</span>
 </span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>
 </span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a><span class="sd">    &quot;&quot;&quot;</span>
@@ -287,10 +287,10 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
 </span><span id="L-169"><a href="#L-169"><span class="linenos">169</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-170"><a href="#L-170"><span class="linenos">170</span></a><span class="sd">    Returns an iterator of accumulated values.</span>
 </span><span id="L-171"><a href="#L-171"><span class="linenos">171</span></a>
-</span><span id="L-172"><a href="#L-172"><span class="linenos">172</span></a><span class="sd">    * pure Python version of standard library&#39;s itertools.accumulate</span>
-</span><span id="L-173"><a href="#L-173"><span class="linenos">173</span></a><span class="sd">    * function f does not default to addition (for typing flexibility)</span>
-</span><span id="L-174"><a href="#L-174"><span class="linenos">174</span></a><span class="sd">    * begins accumulation with an optional starting value</span>
-</span><span id="L-175"><a href="#L-175"><span class="linenos">175</span></a><span class="sd">    * itertools.accumulate had mypy issues</span>
+</span><span id="L-172"><a href="#L-172"><span class="linenos">172</span></a><span class="sd">    * pure Python version of standard library&#39;s `itertools.accumulate`</span>
+</span><span id="L-173"><a href="#L-173"><span class="linenos">173</span></a><span class="sd">    * function `f` does not default to addition (for typing flexibility)</span>
+</span><span id="L-174"><a href="#L-174"><span class="linenos">174</span></a><span class="sd">    * begins accumulation with an optional `initial` value</span>
+</span><span id="L-175"><a href="#L-175"><span class="linenos">175</span></a><span class="sd">    * `itertools.accumulate` had mypy issues</span>
 </span><span id="L-176"><a href="#L-176"><span class="linenos">176</span></a>
 </span><span id="L-177"><a href="#L-177"><span class="linenos">177</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-178"><a href="#L-178"><span class="linenos">178</span></a>    <span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
@@ -322,10 +322,10 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
 </span><span id="L-204"><a href="#L-204"><span class="linenos">204</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-205"><a href="#L-205"><span class="linenos">205</span></a><span class="sd">    Folds an iterable left with optional initial value.</span>
 </span><span id="L-206"><a href="#L-206"><span class="linenos">206</span></a>
-</span><span id="L-207"><a href="#L-207"><span class="linenos">207</span></a><span class="sd">    * traditional FP type order given for function f</span>
-</span><span id="L-208"><a href="#L-208"><span class="linenos">208</span></a><span class="sd">    * when an initial value is not given then ~L = ~D</span>
-</span><span id="L-209"><a href="#L-209"><span class="linenos">209</span></a><span class="sd">    * if iterable empty &amp; no initial value given, return empty MB()</span>
-</span><span id="L-210"><a href="#L-210"><span class="linenos">210</span></a><span class="sd">    * never returns if iterable generates an infinite iterator</span>
+</span><span id="L-207"><a href="#L-207"><span class="linenos">207</span></a><span class="sd">    * traditional FP type order given for function `f`</span>
+</span><span id="L-208"><a href="#L-208"><span class="linenos">208</span></a><span class="sd">    * when an initial value is not given then `~L = ~D`</span>
+</span><span id="L-209"><a href="#L-209"><span class="linenos">209</span></a><span class="sd">    * if iterable empty and no `initial` value given, return empty `MB()`</span>
+</span><span id="L-210"><a href="#L-210"><span class="linenos">210</span></a><span class="sd">    * never returns if `iterable` generates an infinite iterator</span>
 </span><span id="L-211"><a href="#L-211"><span class="linenos">211</span></a>
 </span><span id="L-212"><a href="#L-212"><span class="linenos">212</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-213"><a href="#L-213"><span class="linenos">213</span></a>    <span class="n">acc</span><span class="p">:</span> <span class="n">L</span>
@@ -348,12 +348,12 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
 </span><span id="L-230"><a href="#L-230"><span class="linenos">230</span></a>          <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">D</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="n">R</span><span class="p">],</span>
 </span><span id="L-231"><a href="#L-231"><span class="linenos">231</span></a>          <span class="n">initial</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">R</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MB</span><span class="p">[</span><span class="n">R</span><span class="p">]:</span>
 </span><span id="L-232"><a href="#L-232"><span class="linenos">232</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-233"><a href="#L-233"><span class="linenos">233</span></a><span class="sd">    Folds a reversible iterable right with an optional initial value.</span>
+</span><span id="L-233"><a href="#L-233"><span class="linenos">233</span></a><span class="sd">    Folds a reversible `iterable` right with an optional `initial` value.</span>
 </span><span id="L-234"><a href="#L-234"><span class="linenos">234</span></a>
-</span><span id="L-235"><a href="#L-235"><span class="linenos">235</span></a><span class="sd">    * iterable needs to be reversible</span>
-</span><span id="L-236"><a href="#L-236"><span class="linenos">236</span></a><span class="sd">    * traditional FP type order given for function f</span>
-</span><span id="L-237"><a href="#L-237"><span class="linenos">237</span></a><span class="sd">    * when initial value is not given then ~R = ~D</span>
-</span><span id="L-238"><a href="#L-238"><span class="linenos">238</span></a><span class="sd">    * if iterable empty &amp; no initial value given, return return empty MB()</span>
+</span><span id="L-235"><a href="#L-235"><span class="linenos">235</span></a><span class="sd">    * `iterable` needs to be reversible</span>
+</span><span id="L-236"><a href="#L-236"><span class="linenos">236</span></a><span class="sd">    * traditional FP type order given for function `f`</span>
+</span><span id="L-237"><a href="#L-237"><span class="linenos">237</span></a><span class="sd">    * when initial value is not given then `~R = ~D`</span>
+</span><span id="L-238"><a href="#L-238"><span class="linenos">238</span></a><span class="sd">    * if iterable empty and no `initial` value given, return an empty `MB()`</span>
 </span><span id="L-239"><a href="#L-239"><span class="linenos">239</span></a>
 </span><span id="L-240"><a href="#L-240"><span class="linenos">240</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-241"><a href="#L-241"><span class="linenos">241</span></a>    <span class="n">acc</span><span class="p">:</span> <span class="n">R</span>
@@ -380,7 +380,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
 </span><span id="L-262"><a href="#L-262"><span class="linenos">262</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-263"><a href="#L-263"><span class="linenos">263</span></a><span class="sd">    Short circuit version of foldL.</span>
 </span><span id="L-264"><a href="#L-264"><span class="linenos">264</span></a>
-</span><span id="L-265"><a href="#L-265"><span class="linenos">265</span></a><span class="sd">    * Callable `stopfold` purpose is to prematurely stop fold before end</span>
+</span><span id="L-265"><a href="#L-265"><span class="linenos">265</span></a><span class="sd">    * Callable `stopfold` purpose is to prematurely stop the fold before end</span>
 </span><span id="L-266"><a href="#L-266"><span class="linenos">266</span></a><span class="sd">      * useful for infinite iterables</span>
 </span><span id="L-267"><a href="#L-267"><span class="linenos">267</span></a>
 </span><span id="L-268"><a href="#L-268"><span class="linenos">268</span></a><span class="sd">    &quot;&quot;&quot;</span>
@@ -527,10 +527,10 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
             <div class="pdoc-code codehilite"><pre><span></span><span id="concat-42"><a href="#concat-42"><span class="linenos">42</span></a><span class="k">def</span> <span class="nf">concat</span><span class="p">[</span><span class="n">D</span><span class="p">](</span><span class="o">*</span><span class="n">iterables</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">D</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">D</span><span class="p">]:</span>
 </span><span id="concat-43"><a href="#concat-43"><span class="linenos">43</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sequentially concatenate multiple iterables together.</span>
 </span><span id="concat-44"><a href="#concat-44"><span class="linenos">44</span></a>
-</span><span id="concat-45"><a href="#concat-45"><span class="linenos">45</span></a><span class="sd">    * pure Python version of standard library&#39;s itertools.chain</span>
+</span><span id="concat-45"><a href="#concat-45"><span class="linenos">45</span></a><span class="sd">    * pure Python version of standard library&#39;s `itertools.chain`</span>
 </span><span id="concat-46"><a href="#concat-46"><span class="linenos">46</span></a><span class="sd">    * iterator sequentially yields each iterable until all are exhausted</span>
 </span><span id="concat-47"><a href="#concat-47"><span class="linenos">47</span></a><span class="sd">    * an infinite iterable will prevent subsequent iterables from yielding any values</span>
-</span><span id="concat-48"><a href="#concat-48"><span class="linenos">48</span></a><span class="sd">    * performant to chain</span>
+</span><span id="concat-48"><a href="#concat-48"><span class="linenos">48</span></a><span class="sd">    * performant to `itertools.chain`</span>
 </span><span id="concat-49"><a href="#concat-49"><span class="linenos">49</span></a>
 </span><span id="concat-50"><a href="#concat-50"><span class="linenos">50</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="concat-51"><a href="#concat-51"><span class="linenos">51</span></a>    <span class="k">for</span> <span class="n">iterator</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">iter</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">iterables</span><span class="p">):</span>
@@ -546,10 +546,10 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
             <div class="docstring"><p>Sequentially concatenate multiple iterables together.</p>
 
 <ul>
-<li>pure Python version of standard library's itertools.chain</li>
+<li>pure Python version of standard library's <code>itertools.chain</code></li>
 <li>iterator sequentially yields each iterable until all are exhausted</li>
 <li>an infinite iterable will prevent subsequent iterables from yielding any values</li>
-<li>performant to chain</li>
+<li>performant to <code>itertools.chain</code></li>
 </ul>
 </div>
 
@@ -567,10 +567,10 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
     </div>
     <a class="headerlink" href="#merge"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="merge-86"><a href="#merge-86"><span class="linenos"> 86</span></a><span class="k">def</span> <span class="nf">merge</span><span class="p">[</span><span class="n">D</span><span class="p">](</span><span class="o">*</span><span class="n">iterables</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">D</span><span class="p">],</span> <span class="n">yield_partials</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">D</span><span class="p">]:</span>
-</span><span id="merge-87"><a href="#merge-87"><span class="linenos"> 87</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Shuffle together multiple iterables until one is exhausted.</span>
+</span><span id="merge-87"><a href="#merge-87"><span class="linenos"> 87</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Shuffle together the `iterables` until one is exhausted.</span>
 </span><span id="merge-88"><a href="#merge-88"><span class="linenos"> 88</span></a>
 </span><span id="merge-89"><a href="#merge-89"><span class="linenos"> 89</span></a><span class="sd">    * iterator yields until one of the iterables is exhausted</span>
-</span><span id="merge-90"><a href="#merge-90"><span class="linenos"> 90</span></a><span class="sd">    * if yield_partials is true, yield any unmatched yielded values from other iterables</span>
+</span><span id="merge-90"><a href="#merge-90"><span class="linenos"> 90</span></a><span class="sd">    * if `yield_partials` is true, yield any unmatched yielded values from other iterables</span>
 </span><span id="merge-91"><a href="#merge-91"><span class="linenos"> 91</span></a><span class="sd">      * prevents data lose if any of the iterables are iterators with external references</span>
 </span><span id="merge-92"><a href="#merge-92"><span class="linenos"> 92</span></a>
 </span><span id="merge-93"><a href="#merge-93"><span class="linenos"> 93</span></a><span class="sd">    &quot;&quot;&quot;</span>
@@ -592,11 +592,11 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Shuffle together multiple iterables until one is exhausted.</p>
+            <div class="docstring"><p>Shuffle together the <code>iterables</code> until one is exhausted.</p>
 
 <ul>
 <li>iterator yields until one of the iterables is exhausted</li>
-<li>if yield_partials is true, yield any unmatched yielded values from other iterables
+<li>if <code>yield_partials</code> is true, yield any unmatched yielded values from other iterables
 <ul>
 <li>prevents data lose if any of the iterables are iterators with external references</li>
 </ul></li>
@@ -800,10 +800,10 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
 </span><span id="accumulate-170"><a href="#accumulate-170"><span class="linenos">170</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="accumulate-171"><a href="#accumulate-171"><span class="linenos">171</span></a><span class="sd">    Returns an iterator of accumulated values.</span>
 </span><span id="accumulate-172"><a href="#accumulate-172"><span class="linenos">172</span></a>
-</span><span id="accumulate-173"><a href="#accumulate-173"><span class="linenos">173</span></a><span class="sd">    * pure Python version of standard library&#39;s itertools.accumulate</span>
-</span><span id="accumulate-174"><a href="#accumulate-174"><span class="linenos">174</span></a><span class="sd">    * function f does not default to addition (for typing flexibility)</span>
-</span><span id="accumulate-175"><a href="#accumulate-175"><span class="linenos">175</span></a><span class="sd">    * begins accumulation with an optional starting value</span>
-</span><span id="accumulate-176"><a href="#accumulate-176"><span class="linenos">176</span></a><span class="sd">    * itertools.accumulate had mypy issues</span>
+</span><span id="accumulate-173"><a href="#accumulate-173"><span class="linenos">173</span></a><span class="sd">    * pure Python version of standard library&#39;s `itertools.accumulate`</span>
+</span><span id="accumulate-174"><a href="#accumulate-174"><span class="linenos">174</span></a><span class="sd">    * function `f` does not default to addition (for typing flexibility)</span>
+</span><span id="accumulate-175"><a href="#accumulate-175"><span class="linenos">175</span></a><span class="sd">    * begins accumulation with an optional `initial` value</span>
+</span><span id="accumulate-176"><a href="#accumulate-176"><span class="linenos">176</span></a><span class="sd">    * `itertools.accumulate` had mypy issues</span>
 </span><span id="accumulate-177"><a href="#accumulate-177"><span class="linenos">177</span></a>
 </span><span id="accumulate-178"><a href="#accumulate-178"><span class="linenos">178</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="accumulate-179"><a href="#accumulate-179"><span class="linenos">179</span></a>    <span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
@@ -834,10 +834,10 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
             <div class="docstring"><p>Returns an iterator of accumulated values.</p>
 
 <ul>
-<li>pure Python version of standard library's itertools.accumulate</li>
-<li>function f does not default to addition (for typing flexibility)</li>
-<li>begins accumulation with an optional starting value</li>
-<li>itertools.accumulate had mypy issues</li>
+<li>pure Python version of standard library's <code>itertools.accumulate</code></li>
+<li>function <code>f</code> does not default to addition (for typing flexibility)</li>
+<li>begins accumulation with an optional <code>initial</code> value</li>
+<li><code>itertools.accumulate</code> had mypy issues</li>
 </ul>
 </div>
 
@@ -860,10 +860,10 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
 </span><span id="foldL-205"><a href="#foldL-205"><span class="linenos">205</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="foldL-206"><a href="#foldL-206"><span class="linenos">206</span></a><span class="sd">    Folds an iterable left with optional initial value.</span>
 </span><span id="foldL-207"><a href="#foldL-207"><span class="linenos">207</span></a>
-</span><span id="foldL-208"><a href="#foldL-208"><span class="linenos">208</span></a><span class="sd">    * traditional FP type order given for function f</span>
-</span><span id="foldL-209"><a href="#foldL-209"><span class="linenos">209</span></a><span class="sd">    * when an initial value is not given then ~L = ~D</span>
-</span><span id="foldL-210"><a href="#foldL-210"><span class="linenos">210</span></a><span class="sd">    * if iterable empty &amp; no initial value given, return empty MB()</span>
-</span><span id="foldL-211"><a href="#foldL-211"><span class="linenos">211</span></a><span class="sd">    * never returns if iterable generates an infinite iterator</span>
+</span><span id="foldL-208"><a href="#foldL-208"><span class="linenos">208</span></a><span class="sd">    * traditional FP type order given for function `f`</span>
+</span><span id="foldL-209"><a href="#foldL-209"><span class="linenos">209</span></a><span class="sd">    * when an initial value is not given then `~L = ~D`</span>
+</span><span id="foldL-210"><a href="#foldL-210"><span class="linenos">210</span></a><span class="sd">    * if iterable empty and no `initial` value given, return empty `MB()`</span>
+</span><span id="foldL-211"><a href="#foldL-211"><span class="linenos">211</span></a><span class="sd">    * never returns if `iterable` generates an infinite iterator</span>
 </span><span id="foldL-212"><a href="#foldL-212"><span class="linenos">212</span></a>
 </span><span id="foldL-213"><a href="#foldL-213"><span class="linenos">213</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="foldL-214"><a href="#foldL-214"><span class="linenos">214</span></a>    <span class="n">acc</span><span class="p">:</span> <span class="n">L</span>
@@ -887,10 +887,10 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
             <div class="docstring"><p>Folds an iterable left with optional initial value.</p>
 
 <ul>
-<li>traditional FP type order given for function f</li>
-<li>when an initial value is not given then ~L = ~D</li>
-<li>if iterable empty &amp; no initial value given, return empty MB()</li>
-<li>never returns if iterable generates an infinite iterator</li>
+<li>traditional FP type order given for function <code>f</code></li>
+<li>when an initial value is not given then <code>~L = ~D</code></li>
+<li>if iterable empty and no <code>initial</code> value given, return empty <code>MB()</code></li>
+<li>never returns if <code>iterable</code> generates an infinite iterator</li>
 </ul>
 </div>
 
@@ -911,12 +911,12 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
 </span><span id="foldR-231"><a href="#foldR-231"><span class="linenos">231</span></a>          <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">D</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="n">R</span><span class="p">],</span>
 </span><span id="foldR-232"><a href="#foldR-232"><span class="linenos">232</span></a>          <span class="n">initial</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">R</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MB</span><span class="p">[</span><span class="n">R</span><span class="p">]:</span>
 </span><span id="foldR-233"><a href="#foldR-233"><span class="linenos">233</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="foldR-234"><a href="#foldR-234"><span class="linenos">234</span></a><span class="sd">    Folds a reversible iterable right with an optional initial value.</span>
+</span><span id="foldR-234"><a href="#foldR-234"><span class="linenos">234</span></a><span class="sd">    Folds a reversible `iterable` right with an optional `initial` value.</span>
 </span><span id="foldR-235"><a href="#foldR-235"><span class="linenos">235</span></a>
-</span><span id="foldR-236"><a href="#foldR-236"><span class="linenos">236</span></a><span class="sd">    * iterable needs to be reversible</span>
-</span><span id="foldR-237"><a href="#foldR-237"><span class="linenos">237</span></a><span class="sd">    * traditional FP type order given for function f</span>
-</span><span id="foldR-238"><a href="#foldR-238"><span class="linenos">238</span></a><span class="sd">    * when initial value is not given then ~R = ~D</span>
-</span><span id="foldR-239"><a href="#foldR-239"><span class="linenos">239</span></a><span class="sd">    * if iterable empty &amp; no initial value given, return return empty MB()</span>
+</span><span id="foldR-236"><a href="#foldR-236"><span class="linenos">236</span></a><span class="sd">    * `iterable` needs to be reversible</span>
+</span><span id="foldR-237"><a href="#foldR-237"><span class="linenos">237</span></a><span class="sd">    * traditional FP type order given for function `f`</span>
+</span><span id="foldR-238"><a href="#foldR-238"><span class="linenos">238</span></a><span class="sd">    * when initial value is not given then `~R = ~D`</span>
+</span><span id="foldR-239"><a href="#foldR-239"><span class="linenos">239</span></a><span class="sd">    * if iterable empty and no `initial` value given, return an empty `MB()`</span>
 </span><span id="foldR-240"><a href="#foldR-240"><span class="linenos">240</span></a>
 </span><span id="foldR-241"><a href="#foldR-241"><span class="linenos">241</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="foldR-242"><a href="#foldR-242"><span class="linenos">242</span></a>    <span class="n">acc</span><span class="p">:</span> <span class="n">R</span>
@@ -937,13 +937,13 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Folds a reversible iterable right with an optional initial value.</p>
+            <div class="docstring"><p>Folds a reversible <code>iterable</code> right with an optional <code>initial</code> value.</p>
 
 <ul>
-<li>iterable needs to be reversible</li>
-<li>traditional FP type order given for function f</li>
-<li>when initial value is not given then ~R = ~D</li>
-<li>if iterable empty &amp; no initial value given, return return empty MB()</li>
+<li><code>iterable</code> needs to be reversible</li>
+<li>traditional FP type order given for function <code>f</code></li>
+<li>when initial value is not given then <code>~R = ~D</code></li>
+<li>if iterable empty and no <code>initial</code> value given, return an empty <code>MB()</code></li>
 </ul>
 </div>
 
@@ -968,7 +968,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
 </span><span id="foldLsc-263"><a href="#foldLsc-263"><span class="linenos">263</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="foldLsc-264"><a href="#foldLsc-264"><span class="linenos">264</span></a><span class="sd">    Short circuit version of foldL.</span>
 </span><span id="foldLsc-265"><a href="#foldLsc-265"><span class="linenos">265</span></a>
-</span><span id="foldLsc-266"><a href="#foldLsc-266"><span class="linenos">266</span></a><span class="sd">    * Callable `stopfold` purpose is to prematurely stop fold before end</span>
+</span><span id="foldLsc-266"><a href="#foldLsc-266"><span class="linenos">266</span></a><span class="sd">    * Callable `stopfold` purpose is to prematurely stop the fold before end</span>
 </span><span id="foldLsc-267"><a href="#foldLsc-267"><span class="linenos">267</span></a><span class="sd">      * useful for infinite iterables</span>
 </span><span id="foldLsc-268"><a href="#foldLsc-268"><span class="linenos">268</span></a>
 </span><span id="foldLsc-269"><a href="#foldLsc-269"><span class="linenos">269</span></a><span class="sd">    &quot;&quot;&quot;</span>
@@ -997,7 +997,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.iterables    </h1>
             <div class="docstring"><p>Short circuit version of foldL.</p>
 
 <ul>
-<li>Callable <code>stopfold</code> purpose is to prematurely stop fold before end
+<li>Callable <code>stopfold</code> purpose is to prematurely stop the fold before end
 <ul>
 <li>useful for infinite iterables</li>
 </ul></li>
