@@ -107,7 +107,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.singletons    </h1>
 </span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>
 </span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a>    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>    <span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a>    <span class="n">_instance</span><span class="p">:</span> <span class="n">NoValue</span><span class="o">|</span><span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>
 </span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoValue</span><span class="p">:</span>
 </span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -135,9 +135,9 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.singletons    </h1>
 </span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a><span class="sd">      * always equals itself (unlike `noValue`)</span>
 </span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a><span class="sd">    * usage</span>
 </span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a><span class="sd">      * import Sentinel and then either</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a><span class="sd">        * either use `Sentinel()` directly</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a><span class="sd">        * or define ``_sntinel: Final[Sentinel] = Sentinel()``</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a><span class="sd">          * do not to export it</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a><span class="sd">        * use `Sentinel()` directly</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a><span class="sd">        * or define `_sentinel: Final[Sentinel] = Sentinel()`</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a><span class="sd">          * do not export it</span>
 </span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a><span class="sd">      * compare using either</span>
 </span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a><span class="sd">        * `is` and `is not`</span>
 </span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a><span class="sd">        * `==` and `!=`</span>
@@ -146,7 +146,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.singletons    </h1>
 </span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a>
 </span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>    <span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>    <span class="n">_instance</span><span class="p">:</span> <span class="n">Sentinel</span><span class="o">|</span><span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a>
 </span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a>    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sentinel</span><span class="p">:</span>
 </span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a>        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -198,7 +198,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.singletons    </h1>
 </span><span id="NoValue-41"><a href="#NoValue-41"><span class="linenos">41</span></a>
 </span><span id="NoValue-42"><a href="#NoValue-42"><span class="linenos">42</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="NoValue-43"><a href="#NoValue-43"><span class="linenos">43</span></a>    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
-</span><span id="NoValue-44"><a href="#NoValue-44"><span class="linenos">44</span></a>    <span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="NoValue-44"><a href="#NoValue-44"><span class="linenos">44</span></a>    <span class="n">_instance</span><span class="p">:</span> <span class="n">NoValue</span><span class="o">|</span><span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="NoValue-45"><a href="#NoValue-45"><span class="linenos">45</span></a>
 </span><span id="NoValue-46"><a href="#NoValue-46"><span class="linenos">46</span></a>    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoValue</span><span class="p">:</span>
 </span><span id="NoValue-47"><a href="#NoValue-47"><span class="linenos">47</span></a>        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -272,9 +272,9 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.singletons    </h1>
 </span><span id="Sentinel-69"><a href="#Sentinel-69"><span class="linenos">69</span></a><span class="sd">      * always equals itself (unlike `noValue`)</span>
 </span><span id="Sentinel-70"><a href="#Sentinel-70"><span class="linenos">70</span></a><span class="sd">    * usage</span>
 </span><span id="Sentinel-71"><a href="#Sentinel-71"><span class="linenos">71</span></a><span class="sd">      * import Sentinel and then either</span>
-</span><span id="Sentinel-72"><a href="#Sentinel-72"><span class="linenos">72</span></a><span class="sd">        * either use `Sentinel()` directly</span>
-</span><span id="Sentinel-73"><a href="#Sentinel-73"><span class="linenos">73</span></a><span class="sd">        * or define ``_sntinel: Final[Sentinel] = Sentinel()``</span>
-</span><span id="Sentinel-74"><a href="#Sentinel-74"><span class="linenos">74</span></a><span class="sd">          * do not to export it</span>
+</span><span id="Sentinel-72"><a href="#Sentinel-72"><span class="linenos">72</span></a><span class="sd">        * use `Sentinel()` directly</span>
+</span><span id="Sentinel-73"><a href="#Sentinel-73"><span class="linenos">73</span></a><span class="sd">        * or define `_sentinel: Final[Sentinel] = Sentinel()`</span>
+</span><span id="Sentinel-74"><a href="#Sentinel-74"><span class="linenos">74</span></a><span class="sd">          * do not export it</span>
 </span><span id="Sentinel-75"><a href="#Sentinel-75"><span class="linenos">75</span></a><span class="sd">      * compare using either</span>
 </span><span id="Sentinel-76"><a href="#Sentinel-76"><span class="linenos">76</span></a><span class="sd">        * `is` and `is not`</span>
 </span><span id="Sentinel-77"><a href="#Sentinel-77"><span class="linenos">77</span></a><span class="sd">        * `==` and `!=`</span>
@@ -283,7 +283,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.singletons    </h1>
 </span><span id="Sentinel-80"><a href="#Sentinel-80"><span class="linenos">80</span></a>
 </span><span id="Sentinel-81"><a href="#Sentinel-81"><span class="linenos">81</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="Sentinel-82"><a href="#Sentinel-82"><span class="linenos">82</span></a>    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
-</span><span id="Sentinel-83"><a href="#Sentinel-83"><span class="linenos">83</span></a>    <span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="Sentinel-83"><a href="#Sentinel-83"><span class="linenos">83</span></a>    <span class="n">_instance</span><span class="p">:</span> <span class="n">Sentinel</span><span class="o">|</span><span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="Sentinel-84"><a href="#Sentinel-84"><span class="linenos">84</span></a>
 </span><span id="Sentinel-85"><a href="#Sentinel-85"><span class="linenos">85</span></a>    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sentinel</span><span class="p">:</span>
 </span><span id="Sentinel-86"><a href="#Sentinel-86"><span class="linenos">86</span></a>        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -320,10 +320,10 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.singletons    </h1>
 <ul>
 <li>import Sentinel and then either
 <ul>
-<li>either use <code><a href="#Sentinel">Sentinel()</a></code> directly</li>
-<li>or define <code>_sntinel: Final[Sentinel] = Sentinel()</code>
+<li>use <code><a href="#Sentinel">Sentinel()</a></code> directly</li>
+<li>or define <code>_sentinel: Final[Sentinel] = Sentinel()</code>
 <ul>
-<li>do not to export it</li>
+<li>do not export it</li>
 </ul></li>
 </ul></li>
 <li>compare using either
