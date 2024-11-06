@@ -42,6 +42,18 @@
                 </ul>
 
             </li>
+            <li>
+                    <a class="class" href="#Nada">Nada</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#Nada.sentinel">sentinel</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Nada.nada_get">nada_get</a>
+                        </li>
+                </ul>
+
+            </li>
     </ul>
 
 
@@ -164,7 +176,7 @@ determine if it is a brilliant idea or a horrible blunder.</p>
 </span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 </span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;NoValue&#39;</span><span class="p">,</span> <span class="s1">&#39;Sentinel&#39;</span> <span class="p">]</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;NoValue&#39;</span><span class="p">,</span> <span class="s1">&#39;Sentinel&#39;</span><span class="p">,</span> <span class="s1">&#39;Nada&#39;</span> <span class="p">]</span>
 </span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>
 </span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Final</span><span class="p">,</span> <span class="n">final</span><span class="p">,</span> <span class="n">Iterator</span>
 </span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>
@@ -547,6 +559,234 @@ determine if it is a brilliant idea or a horrible blunder.</p>
 </div>
 
 
+                </section>
+                <section id="Nada">
+                            <input id="Nada-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr class">
+                    <div class="decorator decorator-final">@final</div>
+
+    <span class="def">class</span>
+    <span class="name">Nada</span>:
+
+                <label class="view-source-button" for="Nada-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#Nada"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Nada-145"><a href="#Nada-145"><span class="linenos">145</span></a><span class="nd">@final</span>
+</span><span id="Nada-146"><a href="#Nada-146"><span class="linenos">146</span></a><span class="k">class</span> <span class="nc">Nada</span><span class="p">():</span>
+</span><span id="Nada-147"><a href="#Nada-147"><span class="linenos">147</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Singleton representing &amp; propagating failure. Failure just blissfully</span>
+</span><span id="Nada-148"><a href="#Nada-148"><span class="linenos">148</span></a><span class="sd">    propagates down &quot;the happy path.&quot; Have not used this construct enough yet</span>
+</span><span id="Nada-149"><a href="#Nada-149"><span class="linenos">149</span></a><span class="sd">    to determine if it is a clever idea or a horrible blunder.</span>
+</span><span id="Nada-150"><a href="#Nada-150"><span class="linenos">150</span></a>
+</span><span id="Nada-151"><a href="#Nada-151"><span class="linenos">151</span></a><span class="sd">    * singleton nada: nada = Nada() represents a non-existent value</span>
+</span><span id="Nada-152"><a href="#Nada-152"><span class="linenos">152</span></a><span class="sd">    * returns itself for arbitrary method calls</span>
+</span><span id="Nada-153"><a href="#Nada-153"><span class="linenos">153</span></a><span class="sd">    * returns itself if called as a Callable with arbitrary arguments</span>
+</span><span id="Nada-154"><a href="#Nada-154"><span class="linenos">154</span></a><span class="sd">    * interpreted as an empty container by standard Python functions</span>
+</span><span id="Nada-155"><a href="#Nada-155"><span class="linenos">155</span></a><span class="sd">    * warning: non-standard equality semantics</span>
+</span><span id="Nada-156"><a href="#Nada-156"><span class="linenos">156</span></a><span class="sd">      * comparison compares true only when 2 non-missing values compare true</span>
+</span><span id="Nada-157"><a href="#Nada-157"><span class="linenos">157</span></a><span class="sd">        * when compared to itself behaves somewhat like IEEE Float NAN&#39;s</span>
+</span><span id="Nada-158"><a href="#Nada-158"><span class="linenos">158</span></a><span class="sd">        * `nada is nada` is true</span>
+</span><span id="Nada-159"><a href="#Nada-159"><span class="linenos">159</span></a><span class="sd">        * `nada == nada` is false</span>
+</span><span id="Nada-160"><a href="#Nada-160"><span class="linenos">160</span></a><span class="sd">        * `nada != nada` is true</span>
+</span><span id="Nada-161"><a href="#Nada-161"><span class="linenos">161</span></a><span class="sd">      * thus a == b means two non-missing values compare as equal</span>
+</span><span id="Nada-162"><a href="#Nada-162"><span class="linenos">162</span></a><span class="sd">    * usage</span>
+</span><span id="Nada-163"><a href="#Nada-163"><span class="linenos">163</span></a><span class="sd">      * import Nada and then either</span>
+</span><span id="Nada-164"><a href="#Nada-164"><span class="linenos">164</span></a><span class="sd">        * use `Nada()` directly</span>
+</span><span id="Nada-165"><a href="#Nada-165"><span class="linenos">165</span></a><span class="sd">        * or define `_nada: Final[Nada] = Nada()`</span>
+</span><span id="Nada-166"><a href="#Nada-166"><span class="linenos">166</span></a><span class="sd">          * do not export it</span>
+</span><span id="Nada-167"><a href="#Nada-167"><span class="linenos">167</span></a><span class="sd">      * start propagating failure by setting a propagating value to Nada()</span>
+</span><span id="Nada-168"><a href="#Nada-168"><span class="linenos">168</span></a><span class="sd">        * works best when working with expression</span>
+</span><span id="Nada-169"><a href="#Nada-169"><span class="linenos">169</span></a><span class="sd">        * failure may fail to propagate</span>
+</span><span id="Nada-170"><a href="#Nada-170"><span class="linenos">170</span></a><span class="sd">          * out of a function/method with just side effects</span>
+</span><span id="Nada-171"><a href="#Nada-171"><span class="linenos">171</span></a><span class="sd">          * engineer Nada() to fail to trigger side effects</span>
+</span><span id="Nada-172"><a href="#Nada-172"><span class="linenos">172</span></a><span class="sd">      * test for failure by comparing a result to Nada() itself using</span>
+</span><span id="Nada-173"><a href="#Nada-173"><span class="linenos">173</span></a><span class="sd">        * `is` and `is not`</span>
+</span><span id="Nada-174"><a href="#Nada-174"><span class="linenos">174</span></a><span class="sd">      * propagate failure through a calculation using</span>
+</span><span id="Nada-175"><a href="#Nada-175"><span class="linenos">175</span></a><span class="sd">        * `==` and `!=`</span>
+</span><span id="Nada-176"><a href="#Nada-176"><span class="linenos">176</span></a><span class="sd">          * the Nada() value never equals itself</span>
+</span><span id="Nada-177"><a href="#Nada-177"><span class="linenos">177</span></a><span class="sd">          * and never equals anything else</span>
+</span><span id="Nada-178"><a href="#Nada-178"><span class="linenos">178</span></a>
+</span><span id="Nada-179"><a href="#Nada-179"><span class="linenos">179</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="Nada-180"><a href="#Nada-180"><span class="linenos">180</span></a>    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
+</span><span id="Nada-181"><a href="#Nada-181"><span class="linenos">181</span></a>    <span class="n">_instance</span><span class="p">:</span> <span class="n">Nada</span><span class="o">|</span><span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="Nada-182"><a href="#Nada-182"><span class="linenos">182</span></a>    <span class="n">_hash</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="Nada-183"><a href="#Nada-183"><span class="linenos">183</span></a>
+</span><span id="Nada-184"><a href="#Nada-184"><span class="linenos">184</span></a>    <span class="n">sentinel</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Sentinel</span><span class="p">]</span> <span class="o">=</span> <span class="n">Sentinel</span><span class="p">()</span>
+</span><span id="Nada-185"><a href="#Nada-185"><span class="linenos">185</span></a>
+</span><span id="Nada-186"><a href="#Nada-186"><span class="linenos">186</span></a>    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nada</span><span class="p">:</span>
+</span><span id="Nada-187"><a href="#Nada-187"><span class="linenos">187</span></a>        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Nada-188"><a href="#Nada-188"><span class="linenos">188</span></a>            <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Nada</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+</span><span id="Nada-189"><a href="#Nada-189"><span class="linenos">189</span></a>            <span class="bp">cls</span><span class="o">.</span><span class="n">_hash</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span><span class="p">,</span> <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span><span class="p">,)))</span>
+</span><span id="Nada-190"><a href="#Nada-190"><span class="linenos">190</span></a>        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span>
+</span><span id="Nada-191"><a href="#Nada-191"><span class="linenos">191</span></a>
+</span><span id="Nada-192"><a href="#Nada-192"><span class="linenos">192</span></a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+</span><span id="Nada-193"><a href="#Nada-193"><span class="linenos">193</span></a>        <span class="k">return</span> <span class="nb">iter</span><span class="p">(())</span>
+</span><span id="Nada-194"><a href="#Nada-194"><span class="linenos">194</span></a>
+</span><span id="Nada-195"><a href="#Nada-195"><span class="linenos">195</span></a>    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="Nada-196"><a href="#Nada-196"><span class="linenos">196</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hash</span>
+</span><span id="Nada-197"><a href="#Nada-197"><span class="linenos">197</span></a>
+</span><span id="Nada-198"><a href="#Nada-198"><span class="linenos">198</span></a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="Nada-199"><a href="#Nada-199"><span class="linenos">199</span></a>        <span class="k">return</span> <span class="s1">&#39;Nada()&#39;</span>
+</span><span id="Nada-200"><a href="#Nada-200"><span class="linenos">200</span></a>
+</span><span id="Nada-201"><a href="#Nada-201"><span class="linenos">201</span></a>    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="Nada-202"><a href="#Nada-202"><span class="linenos">202</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Nada-203"><a href="#Nada-203"><span class="linenos">203</span></a>
+</span><span id="Nada-204"><a href="#Nada-204"><span class="linenos">204</span></a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="Nada-205"><a href="#Nada-205"><span class="linenos">205</span></a>        <span class="k">return</span> <span class="mi">0</span>
+</span><span id="Nada-206"><a href="#Nada-206"><span class="linenos">206</span></a>
+</span><span id="Nada-207"><a href="#Nada-207"><span class="linenos">207</span></a>    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nada</span><span class="p">:</span>
+</span><span id="Nada-208"><a href="#Nada-208"><span class="linenos">208</span></a>        <span class="k">return</span> <span class="n">Nada</span><span class="p">()</span>
+</span><span id="Nada-209"><a href="#Nada-209"><span class="linenos">209</span></a>
+</span><span id="Nada-210"><a href="#Nada-210"><span class="linenos">210</span></a>    <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nada</span><span class="p">:</span>
+</span><span id="Nada-211"><a href="#Nada-211"><span class="linenos">211</span></a>        <span class="k">return</span> <span class="n">Nada</span><span class="p">()</span>
+</span><span id="Nada-212"><a href="#Nada-212"><span class="linenos">212</span></a>
+</span><span id="Nada-213"><a href="#Nada-213"><span class="linenos">213</span></a>    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nada</span><span class="p">:</span>
+</span><span id="Nada-214"><a href="#Nada-214"><span class="linenos">214</span></a>        <span class="k">return</span> <span class="n">Nada</span><span class="p">()</span>
+</span><span id="Nada-215"><a href="#Nada-215"><span class="linenos">215</span></a>
+</span><span id="Nada-216"><a href="#Nada-216"><span class="linenos">216</span></a>    <span class="k">def</span> <span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nada</span><span class="p">:</span>
+</span><span id="Nada-217"><a href="#Nada-217"><span class="linenos">217</span></a>        <span class="k">return</span> <span class="n">Nada</span><span class="p">()</span>
+</span><span id="Nada-218"><a href="#Nada-218"><span class="linenos">218</span></a>
+</span><span id="Nada-219"><a href="#Nada-219"><span class="linenos">219</span></a>    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="Nada-220"><a href="#Nada-220"><span class="linenos">220</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Nada-221"><a href="#Nada-221"><span class="linenos">221</span></a>
+</span><span id="Nada-222"><a href="#Nada-222"><span class="linenos">222</span></a>    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="Nada-223"><a href="#Nada-223"><span class="linenos">223</span></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="Nada-224"><a href="#Nada-224"><span class="linenos">224</span></a>
+</span><span id="Nada-225"><a href="#Nada-225"><span class="linenos">225</span></a>    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="Nada-226"><a href="#Nada-226"><span class="linenos">226</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Nada-227"><a href="#Nada-227"><span class="linenos">227</span></a>
+</span><span id="Nada-228"><a href="#Nada-228"><span class="linenos">228</span></a>    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="Nada-229"><a href="#Nada-229"><span class="linenos">229</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Nada-230"><a href="#Nada-230"><span class="linenos">230</span></a>
+</span><span id="Nada-231"><a href="#Nada-231"><span class="linenos">231</span></a>    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="Nada-232"><a href="#Nada-232"><span class="linenos">232</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Nada-233"><a href="#Nada-233"><span class="linenos">233</span></a>
+</span><span id="Nada-234"><a href="#Nada-234"><span class="linenos">234</span></a>    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="Nada-235"><a href="#Nada-235"><span class="linenos">235</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span><span id="Nada-236"><a href="#Nada-236"><span class="linenos">236</span></a>
+</span><span id="Nada-237"><a href="#Nada-237"><span class="linenos">237</span></a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">slice</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span id="Nada-238"><a href="#Nada-238"><span class="linenos">238</span></a>        <span class="k">return</span> <span class="n">Nada</span><span class="p">()</span>
+</span><span id="Nada-239"><a href="#Nada-239"><span class="linenos">239</span></a>
+</span><span id="Nada-240"><a href="#Nada-240"><span class="linenos">240</span></a>    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">slice</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="Nada-241"><a href="#Nada-241"><span class="linenos">241</span></a>        <span class="k">return</span>
+</span><span id="Nada-242"><a href="#Nada-242"><span class="linenos">242</span></a>
+</span><span id="Nada-243"><a href="#Nada-243"><span class="linenos">243</span></a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span id="Nada-244"><a href="#Nada-244"><span class="linenos">244</span></a>        <span class="k">return</span> <span class="n">Nada</span><span class="p">()</span>
+</span><span id="Nada-245"><a href="#Nada-245"><span class="linenos">245</span></a>
+</span><span id="Nada-246"><a href="#Nada-246"><span class="linenos">246</span></a> <span class="c1">#  def __getattr__(self, name: str) -&gt; Callable[[Any], Any]:</span>
+</span><span id="Nada-247"><a href="#Nada-247"><span class="linenos">247</span></a> <span class="c1">#      &quot;&quot;&quot;Comment out for doc generation, pdoc gags on this method.&quot;&quot;&quot;</span>
+</span><span id="Nada-248"><a href="#Nada-248"><span class="linenos">248</span></a> <span class="c1">#      def method(*args: Any, **kwargs: Any) -&gt; Any:</span>
+</span><span id="Nada-249"><a href="#Nada-249"><span class="linenos">249</span></a> <span class="c1">#          return Nada()</span>
+</span><span id="Nada-250"><a href="#Nada-250"><span class="linenos">250</span></a> <span class="c1">#      return method</span>
+</span><span id="Nada-251"><a href="#Nada-251"><span class="linenos">251</span></a>
+</span><span id="Nada-252"><a href="#Nada-252"><span class="linenos">252</span></a>    <span class="k">def</span> <span class="nf">nada_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alt</span><span class="p">:</span> <span class="n">Any</span><span class="o">=</span><span class="n">sentinel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span id="Nada-253"><a href="#Nada-253"><span class="linenos">253</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Nada-254"><a href="#Nada-254"><span class="linenos">254</span></a><span class="sd">        Get an alternate value, defaults to Nada().</span>
+</span><span id="Nada-255"><a href="#Nada-255"><span class="linenos">255</span></a>
+</span><span id="Nada-256"><a href="#Nada-256"><span class="linenos">256</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Nada-257"><a href="#Nada-257"><span class="linenos">257</span></a>        <span class="k">if</span> <span class="n">alt</span> <span class="o">==</span> <span class="n">Sentinel</span><span class="p">():</span>
+</span><span id="Nada-258"><a href="#Nada-258"><span class="linenos">258</span></a>            <span class="k">return</span> <span class="n">Nada</span><span class="p">()</span>
+</span><span id="Nada-259"><a href="#Nada-259"><span class="linenos">259</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="Nada-260"><a href="#Nada-260"><span class="linenos">260</span></a>            <span class="k">return</span> <span class="n">alt</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Singleton representing &amp; propagating failure. Failure just blissfully
+propagates down "the happy path." Have not used this construct enough yet
+to determine if it is a clever idea or a horrible blunder.</p>
+
+<ul>
+<li>singleton nada: nada = Nada() represents a non-existent value</li>
+<li>returns itself for arbitrary method calls</li>
+<li>returns itself if called as a Callable with arbitrary arguments</li>
+<li>interpreted as an empty container by standard Python functions</li>
+<li>warning: non-standard equality semantics
+<ul>
+<li>comparison compares true only when 2 non-missing values compare true
+<ul>
+<li>when compared to itself behaves somewhat like IEEE Float NAN's</li>
+<li><code>nada is nada</code> is true</li>
+<li><code>nada == nada</code> is false</li>
+<li><code>nada != nada</code> is true</li>
+</ul></li>
+<li>thus a == b means two non-missing values compare as equal</li>
+</ul></li>
+<li>usage
+<ul>
+<li>import Nada and then either
+<ul>
+<li>use <code><a href="#Nada">Nada()</a></code> directly</li>
+<li>or define <code>_nada: Final[Nada] = Nada()</code>
+<ul>
+<li>do not export it</li>
+</ul></li>
+</ul></li>
+<li>start propagating failure by setting a propagating value to Nada()
+<ul>
+<li>works best when working with expression</li>
+<li>failure may fail to propagate
+<ul>
+<li>out of a function/method with just side effects</li>
+<li>engineer Nada() to fail to trigger side effects</li>
+</ul></li>
+</ul></li>
+<li>test for failure by comparing a result to Nada() itself using
+<ul>
+<li><code>is</code> and <code>is not</code></li>
+</ul></li>
+<li>propagate failure through a calculation using
+<ul>
+<li><code>==</code> and <code>!=</code>
+<ul>
+<li>the Nada() value never equals itself</li>
+<li>and never equals anything else</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+
+                            <div id="Nada.sentinel" class="classattr">
+                                <div class="attr variable">
+            <span class="name">sentinel</span><span class="annotation">: Final[<a href="#Sentinel">Sentinel</a>]</span>        =
+<span class="default_value">Sentinel()</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Nada.sentinel"></a>
+    
+    
+
+                            </div>
+                            <div id="Nada.nada_get" class="classattr">
+                                        <input id="Nada.nada_get-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">nada_get</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">alt</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">Sentinel</span><span class="p">()</span></span><span class="return-annotation">) -> <span class="n">Any</span>:</span></span>
+
+                <label class="view-source-button" for="Nada.nada_get-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#Nada.nada_get"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Nada.nada_get-252"><a href="#Nada.nada_get-252"><span class="linenos">252</span></a>    <span class="k">def</span> <span class="nf">nada_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alt</span><span class="p">:</span> <span class="n">Any</span><span class="o">=</span><span class="n">sentinel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span id="Nada.nada_get-253"><a href="#Nada.nada_get-253"><span class="linenos">253</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Nada.nada_get-254"><a href="#Nada.nada_get-254"><span class="linenos">254</span></a><span class="sd">        Get an alternate value, defaults to Nada().</span>
+</span><span id="Nada.nada_get-255"><a href="#Nada.nada_get-255"><span class="linenos">255</span></a>
+</span><span id="Nada.nada_get-256"><a href="#Nada.nada_get-256"><span class="linenos">256</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Nada.nada_get-257"><a href="#Nada.nada_get-257"><span class="linenos">257</span></a>        <span class="k">if</span> <span class="n">alt</span> <span class="o">==</span> <span class="n">Sentinel</span><span class="p">():</span>
+</span><span id="Nada.nada_get-258"><a href="#Nada.nada_get-258"><span class="linenos">258</span></a>            <span class="k">return</span> <span class="n">Nada</span><span class="p">()</span>
+</span><span id="Nada.nada_get-259"><a href="#Nada.nada_get-259"><span class="linenos">259</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="Nada.nada_get-260"><a href="#Nada.nada_get-260"><span class="linenos">260</span></a>            <span class="k">return</span> <span class="n">alt</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Get an alternate value, defaults to Nada().</p>
+</div>
+
+
+                            </div>
                 </section>
     </main>
 <script>
