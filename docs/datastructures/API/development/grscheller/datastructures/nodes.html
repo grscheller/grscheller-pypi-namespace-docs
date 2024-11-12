@@ -201,7 +201,7 @@ other data structures which contain these data structures.</p>
 </span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
 </span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>
 </span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>    <span class="k">def</span> <span class="nf">fold</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span>  <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T</span><span class="p">,</span> <span class="n">D</span><span class="p">],</span> <span class="n">T</span><span class="p">],</span> <span class="n">init</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reduce data across linked nodes</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reduce data across linked nodes.</span>
 </span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>
 </span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">        * with a function and an optional starting value</span>
 </span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">        * reduces in natural LIFO order</span>
@@ -371,7 +371,7 @@ other data structures which contain these data structures.</p>
 </span><span id="SL_Node-85"><a href="#SL_Node-85"><span class="linenos"> 85</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
 </span><span id="SL_Node-86"><a href="#SL_Node-86"><span class="linenos"> 86</span></a>
 </span><span id="SL_Node-87"><a href="#SL_Node-87"><span class="linenos"> 87</span></a>    <span class="k">def</span> <span class="nf">fold</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span>  <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T</span><span class="p">,</span> <span class="n">D</span><span class="p">],</span> <span class="n">T</span><span class="p">],</span> <span class="n">init</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-</span><span id="SL_Node-88"><a href="#SL_Node-88"><span class="linenos"> 88</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reduce data across linked nodes</span>
+</span><span id="SL_Node-88"><a href="#SL_Node-88"><span class="linenos"> 88</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reduce data across linked nodes.</span>
 </span><span id="SL_Node-89"><a href="#SL_Node-89"><span class="linenos"> 89</span></a>
 </span><span id="SL_Node-90"><a href="#SL_Node-90"><span class="linenos"> 90</span></a><span class="sd">        * with a function and an optional starting value</span>
 </span><span id="SL_Node-91"><a href="#SL_Node-91"><span class="linenos"> 91</span></a><span class="sd">        * reduces in natural LIFO order</span>
@@ -497,7 +497,7 @@ other data structures which contain these data structures.</p>
     </div>
     <a class="headerlink" href="#SL_Node.fold"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="SL_Node.fold-87"><a href="#SL_Node.fold-87"><span class="linenos"> 87</span></a>    <span class="k">def</span> <span class="nf">fold</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span>  <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T</span><span class="p">,</span> <span class="n">D</span><span class="p">],</span> <span class="n">T</span><span class="p">],</span> <span class="n">init</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-</span><span id="SL_Node.fold-88"><a href="#SL_Node.fold-88"><span class="linenos"> 88</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reduce data across linked nodes</span>
+</span><span id="SL_Node.fold-88"><a href="#SL_Node.fold-88"><span class="linenos"> 88</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Reduce data across linked nodes.</span>
 </span><span id="SL_Node.fold-89"><a href="#SL_Node.fold-89"><span class="linenos"> 89</span></a>
 </span><span id="SL_Node.fold-90"><a href="#SL_Node.fold-90"><span class="linenos"> 90</span></a><span class="sd">        * with a function and an optional starting value</span>
 </span><span id="SL_Node.fold-91"><a href="#SL_Node.fold-91"><span class="linenos"> 91</span></a><span class="sd">        * reduces in natural LIFO order</span>
@@ -519,7 +519,7 @@ other data structures which contain these data structures.</p>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Reduce data across linked nodes</p>
+            <div class="docstring"><p>Reduce data across linked nodes.</p>
 
 <ul>
 <li>with a function and an optional starting value</li>
