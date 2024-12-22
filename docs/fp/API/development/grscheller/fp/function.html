@@ -39,6 +39,9 @@
             <li>
                     <a class="function" href="#partial">partial</a>
             </li>
+            <li>
+                    <a class="function" href="#iter_args">iter_args</a>
+            </li>
     </ul>
 
 
@@ -67,6 +70,7 @@ and application.</p>
 <li>function <strong>swap:</strong> swap the arguments of a 2 argument function</li>
 <li>function <strong>sequenced:</strong> convert function to take a sequence of its arguments</li>
 <li>function <strong>partial:</strong> returns a partially applied function</li>
+<li>function <strong>iter_args:</strong> function returning an iterator of its arguments</li>
 </ul>
 </div>
 
@@ -99,44 +103,51 @@ and application.</p>
 </span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="sd">* function **swap:** swap the arguments of a 2 argument function</span>
 </span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="sd">* function **sequenced:** convert function to take a sequence of its arguments</span>
 </span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="sd">* function **partial:** returns a partially applied function</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Sequence</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;swap&#39;</span><span class="p">,</span> <span class="s1">&#39;sequenced&#39;</span><span class="p">,</span> <span class="s1">&#39;partial&#39;</span> <span class="p">]</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a><span class="c1">## Functional Utilities</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="k">def</span> <span class="nf">swap</span><span class="p">[</span><span class="n">U</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">R</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">U</span><span class="p">,</span><span class="n">V</span><span class="p">],</span><span class="n">R</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">V</span><span class="p">,</span><span class="n">U</span><span class="p">],</span><span class="n">R</span><span class="p">]:</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Swap arguments of a two argument function.&quot;&quot;&quot;</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>    <span class="k">return</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">,</span><span class="n">u</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="k">def</span> <span class="nf">sequenced</span><span class="p">[</span><span class="n">R</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a function with arbitrary positional arguments to one taking</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="sd">    a sequence of the original arguments.</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>    <span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">arguments</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="p">:</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">arguments</span><span class="p">)</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>    <span class="k">return</span> <span class="n">F</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a><span class="k">def</span> <span class="nf">partial</span><span class="p">[</span><span class="n">R</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Partially apply arguments to a function, left to right.</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a><span class="sd">    * type-wise the only thing guaranteed is the return value</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a><span class="sd">    * best practice is to either</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a><span class="sd">      * use `partial` and `sequenced` results immediately and locally</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a><span class="sd">      * otherwise cast the results when they are created</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="n">fn_seq</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="n">vals</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>        <span class="k">return</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">restT</span><span class="p">:</span> <span class="n">fn_seq</span><span class="p">(</span><span class="n">vals</span> <span class="o">+</span> <span class="n">restT</span><span class="p">))</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">bs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="p">:</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>        <span class="k">return</span> <span class="n">apply</span><span class="p">(</span><span class="n">sequenced</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">args</span><span class="p">)(</span><span class="n">bs</span><span class="p">)</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="sd">* function **iter_args:** function returning an iterator of its arguments</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Sequence</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;swap&#39;</span><span class="p">,</span> <span class="s1">&#39;sequenced&#39;</span><span class="p">,</span> <span class="s1">&#39;partial&#39;</span><span class="p">,</span> <span class="s1">&#39;iter_args&#39;</span> <span class="p">]</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="c1">## Functional Utilities</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="k">def</span> <span class="nf">swap</span><span class="p">[</span><span class="n">U</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">R</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">U</span><span class="p">,</span><span class="n">V</span><span class="p">],</span><span class="n">R</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">V</span><span class="p">,</span><span class="n">U</span><span class="p">],</span><span class="n">R</span><span class="p">]:</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Swap arguments of a two argument function.&quot;&quot;&quot;</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a>    <span class="k">return</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="k">def</span> <span class="nf">sequenced</span><span class="p">[</span><span class="n">R</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a function with arbitrary positional arguments to one taking</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">    a sequence of the original arguments.</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a>    <span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">arguments</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="p">:</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a>        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">arguments</span><span class="p">)</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>    <span class="k">return</span> <span class="n">F</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="k">def</span> <span class="nf">partial</span><span class="p">[</span><span class="n">R</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Partially apply arguments to a function, left to right.</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a><span class="sd">    * type-wise the only thing guaranteed is the return value</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a><span class="sd">    * best practice is to either</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a><span class="sd">      * use `partial` and `sequenced` results immediately and locally</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a><span class="sd">      * otherwise cast the results when they are created</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a>
+</span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a>    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">rest</span><span class="p">:</span> <span class="n">R</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="p">:</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a>        <span class="k">return</span> <span class="n">sequenced</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">args</span> <span class="o">+</span> <span class="n">rest</span><span class="p">)</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>    <span class="k">return</span> <span class="n">wrap</span>
 </span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>    <span class="k">return</span> <span class="n">wrap</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a><span class="k">def</span> <span class="nf">iter_args</span><span class="p">[</span><span class="n">A</span><span class="p">](</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Function returning an iterators of its arguments.</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a><span class="sd">    * useful for API&#39;s with single iterable constructors</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>
+</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>        <span class="k">yield</span> <span class="n">arg</span>
 </span></pre></div>
 
 
@@ -152,9 +163,9 @@ and application.</p>
 
     </div>
     <a class="headerlink" href="#swap"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="swap-37"><a href="#swap-37"><span class="linenos">37</span></a><span class="k">def</span> <span class="nf">swap</span><span class="p">[</span><span class="n">U</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">R</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">U</span><span class="p">,</span><span class="n">V</span><span class="p">],</span><span class="n">R</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">V</span><span class="p">,</span><span class="n">U</span><span class="p">],</span><span class="n">R</span><span class="p">]:</span>
-</span><span id="swap-38"><a href="#swap-38"><span class="linenos">38</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Swap arguments of a two argument function.&quot;&quot;&quot;</span>
-</span><span id="swap-39"><a href="#swap-39"><span class="linenos">39</span></a>    <span class="k">return</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">,</span><span class="n">u</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="swap-38"><a href="#swap-38"><span class="linenos">38</span></a><span class="k">def</span> <span class="nf">swap</span><span class="p">[</span><span class="n">U</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">R</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">U</span><span class="p">,</span><span class="n">V</span><span class="p">],</span><span class="n">R</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">V</span><span class="p">,</span><span class="n">U</span><span class="p">],</span><span class="n">R</span><span class="p">]:</span>
+</span><span id="swap-39"><a href="#swap-39"><span class="linenos">39</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Swap arguments of a two argument function.&quot;&quot;&quot;</span>
+</span><span id="swap-40"><a href="#swap-40"><span class="linenos">40</span></a>    <span class="k">return</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
 </span></pre></div>
 
 
@@ -174,13 +185,13 @@ and application.</p>
 
     </div>
     <a class="headerlink" href="#sequenced"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="sequenced-41"><a href="#sequenced-41"><span class="linenos">41</span></a><span class="k">def</span> <span class="nf">sequenced</span><span class="p">[</span><span class="n">R</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
-</span><span id="sequenced-42"><a href="#sequenced-42"><span class="linenos">42</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a function with arbitrary positional arguments to one taking</span>
-</span><span id="sequenced-43"><a href="#sequenced-43"><span class="linenos">43</span></a><span class="sd">    a sequence of the original arguments.</span>
-</span><span id="sequenced-44"><a href="#sequenced-44"><span class="linenos">44</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="sequenced-45"><a href="#sequenced-45"><span class="linenos">45</span></a>    <span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">arguments</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="p">:</span>
-</span><span id="sequenced-46"><a href="#sequenced-46"><span class="linenos">46</span></a>        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">arguments</span><span class="p">)</span>
-</span><span id="sequenced-47"><a href="#sequenced-47"><span class="linenos">47</span></a>    <span class="k">return</span> <span class="n">F</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="sequenced-42"><a href="#sequenced-42"><span class="linenos">42</span></a><span class="k">def</span> <span class="nf">sequenced</span><span class="p">[</span><span class="n">R</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
+</span><span id="sequenced-43"><a href="#sequenced-43"><span class="linenos">43</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a function with arbitrary positional arguments to one taking</span>
+</span><span id="sequenced-44"><a href="#sequenced-44"><span class="linenos">44</span></a><span class="sd">    a sequence of the original arguments.</span>
+</span><span id="sequenced-45"><a href="#sequenced-45"><span class="linenos">45</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="sequenced-46"><a href="#sequenced-46"><span class="linenos">46</span></a>    <span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">arguments</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="p">:</span>
+</span><span id="sequenced-47"><a href="#sequenced-47"><span class="linenos">47</span></a>        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">arguments</span><span class="p">)</span>
+</span><span id="sequenced-48"><a href="#sequenced-48"><span class="linenos">48</span></a>    <span class="k">return</span> <span class="n">F</span>
 </span></pre></div>
 
 
@@ -201,22 +212,19 @@ a sequence of the original arguments.</p>
 
     </div>
     <a class="headerlink" href="#partial"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="partial-49"><a href="#partial-49"><span class="linenos">49</span></a><span class="k">def</span> <span class="nf">partial</span><span class="p">[</span><span class="n">R</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
-</span><span id="partial-50"><a href="#partial-50"><span class="linenos">50</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Partially apply arguments to a function, left to right.</span>
-</span><span id="partial-51"><a href="#partial-51"><span class="linenos">51</span></a>
-</span><span id="partial-52"><a href="#partial-52"><span class="linenos">52</span></a><span class="sd">    * type-wise the only thing guaranteed is the return value</span>
-</span><span id="partial-53"><a href="#partial-53"><span class="linenos">53</span></a><span class="sd">    * best practice is to either</span>
-</span><span id="partial-54"><a href="#partial-54"><span class="linenos">54</span></a><span class="sd">      * use `partial` and `sequenced` results immediately and locally</span>
-</span><span id="partial-55"><a href="#partial-55"><span class="linenos">55</span></a><span class="sd">      * otherwise cast the results when they are created</span>
-</span><span id="partial-56"><a href="#partial-56"><span class="linenos">56</span></a>
-</span><span id="partial-57"><a href="#partial-57"><span class="linenos">57</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="partial-58"><a href="#partial-58"><span class="linenos">58</span></a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="n">fn_seq</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="n">vals</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
-</span><span id="partial-59"><a href="#partial-59"><span class="linenos">59</span></a>        <span class="k">return</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">restT</span><span class="p">:</span> <span class="n">fn_seq</span><span class="p">(</span><span class="n">vals</span> <span class="o">+</span> <span class="n">restT</span><span class="p">))</span>
-</span><span id="partial-60"><a href="#partial-60"><span class="linenos">60</span></a>
-</span><span id="partial-61"><a href="#partial-61"><span class="linenos">61</span></a>    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">bs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="p">:</span>
-</span><span id="partial-62"><a href="#partial-62"><span class="linenos">62</span></a>        <span class="k">return</span> <span class="n">apply</span><span class="p">(</span><span class="n">sequenced</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">args</span><span class="p">)(</span><span class="n">bs</span><span class="p">)</span>
-</span><span id="partial-63"><a href="#partial-63"><span class="linenos">63</span></a>
-</span><span id="partial-64"><a href="#partial-64"><span class="linenos">64</span></a>    <span class="k">return</span> <span class="n">wrap</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="partial-50"><a href="#partial-50"><span class="linenos">50</span></a><span class="k">def</span> <span class="nf">partial</span><span class="p">[</span><span class="n">R</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
+</span><span id="partial-51"><a href="#partial-51"><span class="linenos">51</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Partially apply arguments to a function, left to right.</span>
+</span><span id="partial-52"><a href="#partial-52"><span class="linenos">52</span></a>
+</span><span id="partial-53"><a href="#partial-53"><span class="linenos">53</span></a><span class="sd">    * type-wise the only thing guaranteed is the return value</span>
+</span><span id="partial-54"><a href="#partial-54"><span class="linenos">54</span></a><span class="sd">    * best practice is to either</span>
+</span><span id="partial-55"><a href="#partial-55"><span class="linenos">55</span></a><span class="sd">      * use `partial` and `sequenced` results immediately and locally</span>
+</span><span id="partial-56"><a href="#partial-56"><span class="linenos">56</span></a><span class="sd">      * otherwise cast the results when they are created</span>
+</span><span id="partial-57"><a href="#partial-57"><span class="linenos">57</span></a>
+</span><span id="partial-58"><a href="#partial-58"><span class="linenos">58</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="partial-59"><a href="#partial-59"><span class="linenos">59</span></a>    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="o">*</span><span class="n">rest</span><span class="p">:</span> <span class="n">R</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">R</span><span class="p">:</span>
+</span><span id="partial-60"><a href="#partial-60"><span class="linenos">60</span></a>        <span class="k">return</span> <span class="n">sequenced</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">args</span> <span class="o">+</span> <span class="n">rest</span><span class="p">)</span>
+</span><span id="partial-61"><a href="#partial-61"><span class="linenos">61</span></a>
+</span><span id="partial-62"><a href="#partial-62"><span class="linenos">62</span></a>    <span class="k">return</span> <span class="n">wrap</span>
 </span></pre></div>
 
 
@@ -229,6 +237,37 @@ a sequence of the original arguments.</p>
 <li>use <code><a href="#partial">partial</a></code> and <code><a href="#sequenced">sequenced</a></code> results immediately and locally</li>
 <li>otherwise cast the results when they are created</li>
 </ul></li>
+</ul>
+</div>
+
+
+                </section>
+                <section id="iter_args">
+                            <input id="iter_args-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">iter_args</span><span class="signature pdoc-code condensed">(<span class="param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="s1">&#39;A&#39;</span></span><span class="return-annotation">) -> <span class="s1">&#39;Iterator[A]&#39;</span>:</span></span>
+
+                <label class="view-source-button" for="iter_args-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#iter_args"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="iter_args-64"><a href="#iter_args-64"><span class="linenos">64</span></a><span class="k">def</span> <span class="nf">iter_args</span><span class="p">[</span><span class="n">A</span><span class="p">](</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">A</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+</span><span id="iter_args-65"><a href="#iter_args-65"><span class="linenos">65</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Function returning an iterators of its arguments.</span>
+</span><span id="iter_args-66"><a href="#iter_args-66"><span class="linenos">66</span></a>
+</span><span id="iter_args-67"><a href="#iter_args-67"><span class="linenos">67</span></a><span class="sd">    * useful for API&#39;s with single iterable constructors</span>
+</span><span id="iter_args-68"><a href="#iter_args-68"><span class="linenos">68</span></a>
+</span><span id="iter_args-69"><a href="#iter_args-69"><span class="linenos">69</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="iter_args-70"><a href="#iter_args-70"><span class="linenos">70</span></a>    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+</span><span id="iter_args-71"><a href="#iter_args-71"><span class="linenos">71</span></a>        <span class="k">yield</span> <span class="n">arg</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Function returning an iterators of its arguments.</p>
+
+<ul>
+<li>useful for API's with single iterable constructors</li>
 </ul>
 </div>
 
