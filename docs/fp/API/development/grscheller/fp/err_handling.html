@@ -43,7 +43,7 @@
                                 <a class="function" href="#MB.map">map</a>
                         </li>
                         <li>
-                                <a class="function" href="#MB.flatmap">flatmap</a>
+                                <a class="function" href="#MB.bind">bind</a>
                         </li>
                         <li>
                                 <a class="function" href="#MB.call">call</a>
@@ -88,7 +88,7 @@
                                 <a class="function" href="#XOR.mapRight">mapRight</a>
                         </li>
                         <li>
-                                <a class="function" href="#XOR.flatMap">flatMap</a>
+                                <a class="function" href="#XOR.bind">bind</a>
                         </li>
                         <li>
                                 <a class="function" href="#XOR.call">call</a>
@@ -181,7 +181,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.err_handling    </h1>
 </span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">      * `MB(MB(d)) == MB(d)`</span>
 </span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="sd">      * `MB(MB()) == MB()`</span>
 </span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">    * immutable, a `MB` does not change after being created</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">      * immutable semantics, map &amp; flatMap return new instances</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">      * immutable semantics, map &amp; bind return new instances</span>
 </span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">        * warning: contained values need not be immutable</span>
 </span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">        * warning: not hashable if contained value is mutable</span>
 </span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>
@@ -272,7 +272,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.err_handling    </h1>
 </span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 </span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>                <span class="k">return</span> <span class="n">MB</span><span class="p">()</span>
 </span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>
-</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>    <span class="k">def</span> <span class="nf">flatmap</span><span class="p">[</span><span class="n">U</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">D</span><span class="p">],</span> <span class="n">MB</span><span class="p">[</span><span class="n">U</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">MB</span><span class="p">[</span><span class="n">U</span><span class="p">]:</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>    <span class="k">def</span> <span class="nf">bind</span><span class="p">[</span><span class="n">U</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">D</span><span class="p">],</span> <span class="n">MB</span><span class="p">[</span><span class="n">U</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">MB</span><span class="p">[</span><span class="n">U</span><span class="p">]:</span>
 </span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Map `MB` with function `f` and flatten.&quot;&quot;&quot;</span>
 </span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>        <span class="k">try</span><span class="p">:</span>
 </span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>            <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">))</span> <span class="k">if</span> <span class="bp">self</span> <span class="k">else</span> <span class="n">MB</span><span class="p">())</span>
@@ -344,7 +344,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.err_handling    </h1>
 </span><span id="L-202"><a href="#L-202"><span class="linenos">202</span></a><span class="sd">        * are the same object</span>
 </span><span id="L-203"><a href="#L-203"><span class="linenos">203</span></a><span class="sd">        * compare as equal</span>
 </span><span id="L-204"><a href="#L-204"><span class="linenos">204</span></a><span class="sd">    * immutable, an `XOR` does not change after being created</span>
-</span><span id="L-205"><a href="#L-205"><span class="linenos">205</span></a><span class="sd">      * immutable semantics, map &amp; flatMap return new instances</span>
+</span><span id="L-205"><a href="#L-205"><span class="linenos">205</span></a><span class="sd">      * immutable semantics, map &amp; bind return new instances</span>
 </span><span id="L-206"><a href="#L-206"><span class="linenos">206</span></a><span class="sd">        * warning: contained values need not be immutable</span>
 </span><span id="L-207"><a href="#L-207"><span class="linenos">207</span></a><span class="sd">        * warning: not hashable if value or potential right value mutable</span>
 </span><span id="L-208"><a href="#L-208"><span class="linenos">208</span></a>
@@ -516,7 +516,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.err_handling    </h1>
 </span><span id="L-374"><a href="#L-374"><span class="linenos">374</span></a>
 </span><span id="L-375"><a href="#L-375"><span class="linenos">375</span></a>        <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
 </span><span id="L-376"><a href="#L-376"><span class="linenos">376</span></a>
-</span><span id="L-377"><a href="#L-377"><span class="linenos">377</span></a>    <span class="k">def</span> <span class="nf">flatMap</span><span class="p">[</span><span class="n">U</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">L</span><span class="p">],</span> <span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
+</span><span id="L-377"><a href="#L-377"><span class="linenos">377</span></a>    <span class="k">def</span> <span class="nf">bind</span><span class="p">[</span><span class="n">U</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">L</span><span class="p">],</span> <span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
 </span><span id="L-378"><a href="#L-378"><span class="linenos">378</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Flatmap - bind</span>
 </span><span id="L-379"><a href="#L-379"><span class="linenos">379</span></a>
 </span><span id="L-380"><a href="#L-380"><span class="linenos">380</span></a><span class="sd">        * map over then flatten left values</span>
@@ -599,7 +599,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.err_handling    </h1>
 </span><span id="MB-40"><a href="#MB-40"><span class="linenos"> 40</span></a><span class="sd">      * `MB(MB(d)) == MB(d)`</span>
 </span><span id="MB-41"><a href="#MB-41"><span class="linenos"> 41</span></a><span class="sd">      * `MB(MB()) == MB()`</span>
 </span><span id="MB-42"><a href="#MB-42"><span class="linenos"> 42</span></a><span class="sd">    * immutable, a `MB` does not change after being created</span>
-</span><span id="MB-43"><a href="#MB-43"><span class="linenos"> 43</span></a><span class="sd">      * immutable semantics, map &amp; flatMap return new instances</span>
+</span><span id="MB-43"><a href="#MB-43"><span class="linenos"> 43</span></a><span class="sd">      * immutable semantics, map &amp; bind return new instances</span>
 </span><span id="MB-44"><a href="#MB-44"><span class="linenos"> 44</span></a><span class="sd">        * warning: contained values need not be immutable</span>
 </span><span id="MB-45"><a href="#MB-45"><span class="linenos"> 45</span></a><span class="sd">        * warning: not hashable if contained value is mutable</span>
 </span><span id="MB-46"><a href="#MB-46"><span class="linenos"> 46</span></a>
@@ -690,7 +690,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.err_handling    </h1>
 </span><span id="MB-131"><a href="#MB-131"><span class="linenos">131</span></a>            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 </span><span id="MB-132"><a href="#MB-132"><span class="linenos">132</span></a>                <span class="k">return</span> <span class="n">MB</span><span class="p">()</span>
 </span><span id="MB-133"><a href="#MB-133"><span class="linenos">133</span></a>
-</span><span id="MB-134"><a href="#MB-134"><span class="linenos">134</span></a>    <span class="k">def</span> <span class="nf">flatmap</span><span class="p">[</span><span class="n">U</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">D</span><span class="p">],</span> <span class="n">MB</span><span class="p">[</span><span class="n">U</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">MB</span><span class="p">[</span><span class="n">U</span><span class="p">]:</span>
+</span><span id="MB-134"><a href="#MB-134"><span class="linenos">134</span></a>    <span class="k">def</span> <span class="nf">bind</span><span class="p">[</span><span class="n">U</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">D</span><span class="p">],</span> <span class="n">MB</span><span class="p">[</span><span class="n">U</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">MB</span><span class="p">[</span><span class="n">U</span><span class="p">]:</span>
 </span><span id="MB-135"><a href="#MB-135"><span class="linenos">135</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Map `MB` with function `f` and flatten.&quot;&quot;&quot;</span>
 </span><span id="MB-136"><a href="#MB-136"><span class="linenos">136</span></a>        <span class="k">try</span><span class="p">:</span>
 </span><span id="MB-137"><a href="#MB-137"><span class="linenos">137</span></a>            <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">))</span> <span class="k">if</span> <span class="bp">self</span> <span class="k">else</span> <span class="n">MB</span><span class="p">())</span>
@@ -759,7 +759,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.err_handling    </h1>
 </ul></li>
 <li>immutable, a <code><a href="#MB">MB</a></code> does not change after being created
 <ul>
-<li>immutable semantics, map &amp; flatMap return new instances
+<li>immutable semantics, map &amp; bind return new instances
 <ul>
 <li>warning: contained values need not be immutable</li>
 <li>warning: not hashable if contained value is mutable</li>
@@ -871,23 +871,23 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.err_handling    </h1>
 
 
                             </div>
-                            <div id="MB.flatmap" class="classattr">
-                                        <input id="MB.flatmap-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            <div id="MB.bind" class="classattr">
+                                        <input id="MB.bind-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">flatmap</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">f</span><span class="p">:</span> <span class="s1">&#39;Callable[[D], MB[U]]&#39;</span></span><span class="return-annotation">) -> <span class="s1">&#39;MB[U]&#39;</span>:</span></span>
+        <span class="name">bind</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">f</span><span class="p">:</span> <span class="s1">&#39;Callable[[D], MB[U]]&#39;</span></span><span class="return-annotation">) -> <span class="s1">&#39;MB[U]&#39;</span>:</span></span>
 
-                <label class="view-source-button" for="MB.flatmap-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="MB.bind-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#MB.flatmap"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="MB.flatmap-134"><a href="#MB.flatmap-134"><span class="linenos">134</span></a>    <span class="k">def</span> <span class="nf">flatmap</span><span class="p">[</span><span class="n">U</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">D</span><span class="p">],</span> <span class="n">MB</span><span class="p">[</span><span class="n">U</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">MB</span><span class="p">[</span><span class="n">U</span><span class="p">]:</span>
-</span><span id="MB.flatmap-135"><a href="#MB.flatmap-135"><span class="linenos">135</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Map `MB` with function `f` and flatten.&quot;&quot;&quot;</span>
-</span><span id="MB.flatmap-136"><a href="#MB.flatmap-136"><span class="linenos">136</span></a>        <span class="k">try</span><span class="p">:</span>
-</span><span id="MB.flatmap-137"><a href="#MB.flatmap-137"><span class="linenos">137</span></a>            <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">))</span> <span class="k">if</span> <span class="bp">self</span> <span class="k">else</span> <span class="n">MB</span><span class="p">())</span>
-</span><span id="MB.flatmap-138"><a href="#MB.flatmap-138"><span class="linenos">138</span></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-</span><span id="MB.flatmap-139"><a href="#MB.flatmap-139"><span class="linenos">139</span></a>            <span class="k">return</span> <span class="n">MB</span><span class="p">()</span>
+    <a class="headerlink" href="#MB.bind"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="MB.bind-134"><a href="#MB.bind-134"><span class="linenos">134</span></a>    <span class="k">def</span> <span class="nf">bind</span><span class="p">[</span><span class="n">U</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">D</span><span class="p">],</span> <span class="n">MB</span><span class="p">[</span><span class="n">U</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">MB</span><span class="p">[</span><span class="n">U</span><span class="p">]:</span>
+</span><span id="MB.bind-135"><a href="#MB.bind-135"><span class="linenos">135</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Map `MB` with function `f` and flatten.&quot;&quot;&quot;</span>
+</span><span id="MB.bind-136"><a href="#MB.bind-136"><span class="linenos">136</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="MB.bind-137"><a href="#MB.bind-137"><span class="linenos">137</span></a>            <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">))</span> <span class="k">if</span> <span class="bp">self</span> <span class="k">else</span> <span class="n">MB</span><span class="p">())</span>
+</span><span id="MB.bind-138"><a href="#MB.bind-138"><span class="linenos">138</span></a>        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+</span><span id="MB.bind-139"><a href="#MB.bind-139"><span class="linenos">139</span></a>            <span class="k">return</span> <span class="n">MB</span><span class="p">()</span>
 </span></pre></div>
 
 
@@ -1072,7 +1072,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.err_handling    </h1>
 </span><span id="XOR-203"><a href="#XOR-203"><span class="linenos">203</span></a><span class="sd">        * are the same object</span>
 </span><span id="XOR-204"><a href="#XOR-204"><span class="linenos">204</span></a><span class="sd">        * compare as equal</span>
 </span><span id="XOR-205"><a href="#XOR-205"><span class="linenos">205</span></a><span class="sd">    * immutable, an `XOR` does not change after being created</span>
-</span><span id="XOR-206"><a href="#XOR-206"><span class="linenos">206</span></a><span class="sd">      * immutable semantics, map &amp; flatMap return new instances</span>
+</span><span id="XOR-206"><a href="#XOR-206"><span class="linenos">206</span></a><span class="sd">      * immutable semantics, map &amp; bind return new instances</span>
 </span><span id="XOR-207"><a href="#XOR-207"><span class="linenos">207</span></a><span class="sd">        * warning: contained values need not be immutable</span>
 </span><span id="XOR-208"><a href="#XOR-208"><span class="linenos">208</span></a><span class="sd">        * warning: not hashable if value or potential right value mutable</span>
 </span><span id="XOR-209"><a href="#XOR-209"><span class="linenos">209</span></a>
@@ -1244,7 +1244,7 @@ grscheller<wbr>.<a href="./../fp.html">fp</a><wbr>.err_handling    </h1>
 </span><span id="XOR-375"><a href="#XOR-375"><span class="linenos">375</span></a>
 </span><span id="XOR-376"><a href="#XOR-376"><span class="linenos">376</span></a>        <span class="k">return</span> <span class="n">XOR</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
 </span><span id="XOR-377"><a href="#XOR-377"><span class="linenos">377</span></a>
-</span><span id="XOR-378"><a href="#XOR-378"><span class="linenos">378</span></a>    <span class="k">def</span> <span class="nf">flatMap</span><span class="p">[</span><span class="n">U</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">L</span><span class="p">],</span> <span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
+</span><span id="XOR-378"><a href="#XOR-378"><span class="linenos">378</span></a>    <span class="k">def</span> <span class="nf">bind</span><span class="p">[</span><span class="n">U</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">L</span><span class="p">],</span> <span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
 </span><span id="XOR-379"><a href="#XOR-379"><span class="linenos">379</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Flatmap - bind</span>
 </span><span id="XOR-380"><a href="#XOR-380"><span class="linenos">380</span></a>
 </span><span id="XOR-381"><a href="#XOR-381"><span class="linenos">381</span></a><span class="sd">        * map over then flatten left values</span>
@@ -1332,7 +1332,7 @@ value, but not both.</p>
 </ul></li>
 <li>immutable, an <code><a href="#XOR">XOR</a></code> does not change after being created
 <ul>
-<li>immutable semantics, map &amp; flatMap return new instances
+<li>immutable semantics, map &amp; bind return new instances
 <ul>
 <li>warning: contained values need not be immutable</li>
 <li>warning: not hashable if value or potential right value mutable</li>
@@ -1612,28 +1612,28 @@ value, but not both.</p>
 
 
                             </div>
-                            <div id="XOR.flatMap" class="classattr">
-                                        <input id="XOR.flatMap-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+                            <div id="XOR.bind" class="classattr">
+                                        <input id="XOR.bind-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">flatMap</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">f</span><span class="p">:</span> <span class="s1">&#39;Callable[[L], XOR[U, R]]&#39;</span></span><span class="return-annotation">) -> <span class="s1">&#39;XOR[U, R]&#39;</span>:</span></span>
+        <span class="name">bind</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">f</span><span class="p">:</span> <span class="s1">&#39;Callable[[L], XOR[U, R]]&#39;</span></span><span class="return-annotation">) -> <span class="s1">&#39;XOR[U, R]&#39;</span>:</span></span>
 
-                <label class="view-source-button" for="XOR.flatMap-view-source"><span>View Source</span></label>
+                <label class="view-source-button" for="XOR.bind-view-source"><span>View Source</span></label>
 
     </div>
-    <a class="headerlink" href="#XOR.flatMap"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="XOR.flatMap-378"><a href="#XOR.flatMap-378"><span class="linenos">378</span></a>    <span class="k">def</span> <span class="nf">flatMap</span><span class="p">[</span><span class="n">U</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">L</span><span class="p">],</span> <span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
-</span><span id="XOR.flatMap-379"><a href="#XOR.flatMap-379"><span class="linenos">379</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Flatmap - bind</span>
-</span><span id="XOR.flatMap-380"><a href="#XOR.flatMap-380"><span class="linenos">380</span></a>
-</span><span id="XOR.flatMap-381"><a href="#XOR.flatMap-381"><span class="linenos">381</span></a><span class="sd">        * map over then flatten left values</span>
-</span><span id="XOR.flatMap-382"><a href="#XOR.flatMap-382"><span class="linenos">382</span></a><span class="sd">        * propagate right values</span>
-</span><span id="XOR.flatMap-383"><a href="#XOR.flatMap-383"><span class="linenos">383</span></a>
-</span><span id="XOR.flatMap-384"><a href="#XOR.flatMap-384"><span class="linenos">384</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="XOR.flatMap-385"><a href="#XOR.flatMap-385"><span class="linenos">385</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_left</span> <span class="o">==</span> <span class="n">MB</span><span class="p">():</span>
-</span><span id="XOR.flatMap-386"><a href="#XOR.flatMap-386"><span class="linenos">386</span></a>            <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="bp">self</span><span class="p">)</span>
-</span><span id="XOR.flatMap-387"><a href="#XOR.flatMap-387"><span class="linenos">387</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="XOR.flatMap-388"><a href="#XOR.flatMap-388"><span class="linenos">388</span></a>            <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_left</span><span class="p">))</span>
+    <a class="headerlink" href="#XOR.bind"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="XOR.bind-378"><a href="#XOR.bind-378"><span class="linenos">378</span></a>    <span class="k">def</span> <span class="nf">bind</span><span class="p">[</span><span class="n">U</span><span class="p">](</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">L</span><span class="p">],</span> <span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">]:</span>
+</span><span id="XOR.bind-379"><a href="#XOR.bind-379"><span class="linenos">379</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Flatmap - bind</span>
+</span><span id="XOR.bind-380"><a href="#XOR.bind-380"><span class="linenos">380</span></a>
+</span><span id="XOR.bind-381"><a href="#XOR.bind-381"><span class="linenos">381</span></a><span class="sd">        * map over then flatten left values</span>
+</span><span id="XOR.bind-382"><a href="#XOR.bind-382"><span class="linenos">382</span></a><span class="sd">        * propagate right values</span>
+</span><span id="XOR.bind-383"><a href="#XOR.bind-383"><span class="linenos">383</span></a>
+</span><span id="XOR.bind-384"><a href="#XOR.bind-384"><span class="linenos">384</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="XOR.bind-385"><a href="#XOR.bind-385"><span class="linenos">385</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_left</span> <span class="o">==</span> <span class="n">MB</span><span class="p">():</span>
+</span><span id="XOR.bind-386"><a href="#XOR.bind-386"><span class="linenos">386</span></a>            <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">XOR</span><span class="p">[</span><span class="n">U</span><span class="p">,</span> <span class="n">R</span><span class="p">],</span> <span class="bp">self</span><span class="p">)</span>
+</span><span id="XOR.bind-387"><a href="#XOR.bind-387"><span class="linenos">387</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="XOR.bind-388"><a href="#XOR.bind-388"><span class="linenos">388</span></a>            <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_left</span><span class="p">))</span>
 </span></pre></div>
 
 
