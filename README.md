@@ -1,4 +1,4 @@
-#@ Docs for archived grscheller PyPI projects
+## Docs for archived grscheller PyPI projects
 
 Detailed
 [documentation](https://grscheller.github.io/grscheller-pypi-namespace-docs/)
@@ -8,9 +8,11 @@ for archived PyPI grscheller namespace projects.
 
 #### Developer tools (dtools) projects
 
-* [dtools.circular-array](https://github.com/grscheller/circular-array)
-* [dtools.datastructures](https://github.com/grscheller/datastructures)
-* [dtools.fp](https://github.com/grscheller/fp)
+* [dtools.circular-array](https://github.com/grscheller/dtools-circular-array)
+* [dtools.datastructures](https://github.com/grscheller/dtools-queues)
+* [dtools.datastructures](https://github.com/grscheller/dtools-tuples)
+* [dtools.datastructures](https://github.com/grscheller/dtools-splitends)
+* [dtools.fp](https://github.com/grscheller/dtools-fp)
 
 #### Boring math (bm) projects
 
